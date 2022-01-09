@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Pytorch中用到的陌生python命令</title>
+    <url>/2022/01/06/2022-01-06-Pytorch%E4%B8%AD%E7%94%A8%E5%88%B0%E7%9A%84%E9%99%8C%E7%94%9Fpython%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>看Faster R-CNN代码时遇到的一些比较陌生，不熟悉的python命令。</p>
+<span id="more"></span>
+<ul>
+<li> zip函数</li>
+<li>with关键字</li>
+</ul>
+<p>　　无论<code>with</code>中的代码块在执行的过程中发生任何情况，文件最终都会被关闭。如果代码块在执行的过程中发生了一个异常，那么在这个异常被抛出前，程序会先将被打开的文件关闭。</p>
+<ul>
+<li>[元组tuple](<a href="https://www.runoob.com/python/python-tuples.html">Python 元组 | 菜鸟教程 (runoob.com)</a>)</li>
+<li><a href="https://www.runoob.com/python/python-lists.html">列表list</a>  </li>
+<li><a href="https://www.runoob.com/python/att-string-split.html">split()方法</a></li>
+<li><a href="https://www.runoob.com/python/att-string-join.html">join()方法</a></li>
+<li></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>pytorch</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Faster R-CNN</title>
+    <url>/2022/01/05/Faster%20R-CNN/</url>
+    <content><![CDATA[<p>Pytorch版Faster R-CNN代码的一些解析。</p>
+<span id="more"></span>
+
+<p>##文件结构</p>
+<ul>
+<li>backbone:特征提取网络</li>
+<li>network_files:Faster R-CNN网络（包括Faster RCNN以及RPN等模块）</li>
+<li>train_utils:训练验证相关模块（包括cocotools）</li>
+<li>my_dataset.py: 自定义dataset用于读取VOC数据集</li>
+<li>train_mobilenet.py: 以MobileNetV2做为backbone进行训练</li>
+<li>train_resnet50_fpn.py: 以resnet50+FPN做为backbone进行训练</li>
+<li>train_multi_GPU.py: 针对使用多GPU的用户使用</li>
+<li>predict.py: 简易的预测脚本，使用训练好的权重进行预测测试</li>
+<li>validation.py: 利用训练好的权重验证/测试数据的COCO指标，并生成record_mAP.txt文件</li>
+<li>pascal_voc_classes.json: pascal_voc标签文件</li>
+</ul>
+<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p>Pascal VOC2012 [bilibili](<a href="https://www.bilibili.com/video/BV1kV411k7D8?spm_id_from=333.999.0.0">PASCAL VOC2012数据集讲解与制作自己的数据集_哔哩哔哩_bilibili</a>)</p>
+<ul>
+<li>分为四大类：交通工具，家具，动物，其他(人)，共二十个类别</li>
+</ul>
+<p>文件目录：![](../images/Faster R-CNN/image-20220106191434379.png)</p>
+<p>![](../images/Faster R-CNN/fasterRCNN.png)</p>
+<p>![](../images/Faster R-CNN/webp.png)</p>
+<h2 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2><h3 id="train-mobilenetv2"><a href="#train-mobilenetv2" class="headerlink" title="train_mobilenetv2"></a>train_mobilenetv2</h3><ul>
+<li>creat_model 函数部分</li>
+</ul>
+<p>backbone的选择</p>
+<ul>
+<li>main 函数部分</li>
+</ul>
+<p>检查打印设备信息，判断是否有GPU，有就用GPU训练，否则使用CPU</p>
+<p>检查是否有</p>
+<h3 id="spilt-data-py"><a href="#spilt-data-py" class="headerlink" title="spilt_data.py"></a>spilt_data.py</h3><p>生成train.txt和val.txt，划分训练集和验证集</p>
+<h3 id="my-dataset-py"><a href="#my-dataset-py" class="headerlink" title="my_dataset.py"></a>my_dataset.py</h3><p>构建自己的数据集</p>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+        <category>Faster R-CNN</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>目标检测</tag>
+        <tag>Faster R-CNN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pytorch和Pycharm的安装和配置</title>
+    <url>/2022/01/05/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="搭载Conda环境"><a href="#搭载Conda环境" class="headerlink" title="搭载Conda环境"></a>搭载Conda环境</h2><p>搭载Conda环境我们使用Anaconda软件</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">清华原镜像</a>根据自己电脑的系统选择最新的安装包，我的电脑为Windows10 64位，因此选择第一个。<br><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105170049546.png"></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装路径可自定。为了减少以后不必要的麻烦，建议选All users。以及勾选advanced options的第一个选项，其余默认即可。</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105170237869.png"></p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105170647257.png"></p>
+<p>安装需要一些时间。。。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>安装完成后，Windows开始菜单可以看到，在Prompt中输入conda list，能看到许多packages，证明安装完成。</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105171130573.png"></p>
+<img data-src="/images/Pytorch和Pycharm的安装和配置/image-20220105171429207.png" style="zoom:67%;" />
+
+<h3 id="创建python环境"><a href="#创建python环境" class="headerlink" title="创建python环境"></a>创建python环境</h3><p>anaconda prompt创建环境</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#创建一个名字为DPlearning的python3.9环境，环境名称和python版本可自定</span></span><br><span class="line">conda create -n DPlearning python=3.9</span><br></pre></td></tr></table></figure>
+
+<p>会安装一些包，选择y即可。</p>
+<img data-src="/images/Pytorch和Pycharm的安装和配置/image-20220105172757325.png" style="zoom: 67%;" />
+
+<p>安装完成后可以搭建pytorch的环境。</p>
+<h3 id="GPU环境"><a href="#GPU环境" class="headerlink" title="GPU环境"></a>GPU环境</h3><p>我的电脑有英伟达的GPU，因此装的GPU环境。</p>
+<p>桌面右键打开英伟达控制面板，右键没有英伟达控制面板就去挂网下载最新驱动</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173224328.png"></p>
+<p>点击系统信息，</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173302254.png"></p>
+<p>根据驱动版本选择对应的cuda版本</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173408251.png"></p>
+<p>或者在组件里能够看到支持的最高cuda版本</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173408251.png"></p>
+<h4 id="安装pytorch-GPU版本"><a href="#安装pytorch-GPU版本" class="headerlink" title="安装pytorch GPU版本"></a>安装pytorch GPU版本</h4><p><a href="https://pytorch.org/">pytorch官网</a> </p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173907106.png"></p>
+<p>根据自己的需求选，</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173924774.png"></p>
+<p>安装包很大，所以我们最好在安装前先配置上清华源，prompt输入以下命令</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span></span><br><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span></span><br><span class="line">conda config --set show_channel_urls yes</span><br><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span></span><br></pre></td></tr></table></figure>
+
+<p>复制安装命令，<strong>注意，去掉后面的-c pytorch</strong></p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105174034252.png"></p>
+<p>然后DOS窗口<strong>activate命令进入刚刚建立的conda环境</strong>，粘贴安装命令，回车，等待安装。。。</p>
+<p>出现选择统统选y。等待。。。</p>
+<p>安装完成</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105182909350.png"></p>
+<p>输入以下命令检测是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python</span><br><span class="line">import torch	<span class="comment">#未报错说明torch安装成功</span></span><br><span class="line"><span class="built_in">print</span>(torch.cuda.is_available())	<span class="comment">#输出为True说明cuda安装正常</span></span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105183052580.png"></p>
+<p>至此，pytorch和cuda的安装结束。接下来是在pycharm里配置pytorch。</p>
+<h2 id="Pycharm"><a href="#Pycharm" class="headerlink" title="Pycharm"></a>Pycharm</h2><h3 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h3><p><a href="https://www.jetbrains.com/pycharm/download/#section=windows">官网下载</a> 下载社区版就行。</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105172257502.png"></p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>按照自己需求勾选。对后续进程无影响。</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105185236893.png"></p>
+<p>等待安装完成。。。</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105185522779.png" alt="image-20220105185522779"></p>
+<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>新项目的位置可以自定，由于之前配置了pytorch环境，所以我们选择Previously configured interpreter，选中之前配置好的python解释器，点击创建，</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105190058442.png"></p>
+<p>如果Previously configured interpreter空白，点后面的三个点，可以找到之前配置好的python解释器。选择完后点创建。<br><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105190312021.png"></p>
+<p>pycharm设置里，python解释器里也有torch，终端命令检测也正常。</p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105195741017.png"></p>
+<p><img data-src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105195936721.png"></p>
+<p>至此，安装结束。</p>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>pytorch</tag>
+        <tag>深度学习</tag>
+        <tag>pycharm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2022/01/04/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span> 
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>hexo博客基本命令</title>
+    <url>/2022/01/04/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>本文介绍hexo博客的一些基本操作方法：</p>
+<span id="more"></span> 
+
+<h2 id="插入语法框"><a href="#插入语法框" class="headerlink" title="插入语法框"></a>插入语法框</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/```bash</span><br><span class="line">要输入的语法</span><br><span class="line">/```</span><br></pre></td></tr></table></figure>
+<p><strong>注意：为了防止编译加入的/，在实际应用中要去掉/</strong></p>
+<h3 id="插入本地图片"><a href="#插入本地图片" class="headerlink" title="插入本地图片"></a>插入本地图片</h3><p>需要将要插入的本地图片保存在博客根目录里source/images文件夹内。若没有images文件夹则新建一个，命名可自定。<br>然后加入以下代码：<br><strong>方法一：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![]()</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![a cat](/images/cat.png)</span><br></pre></td></tr></table></figure>
+<p>其中，[    ]内为对图片的描述，可以空白。</p>
+<p><strong>方法二：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">&quot;/images/cat.png&quot;</span> alt=<span class="string">&quot;a cat&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>“    “部分为本地图片的目录，和方法一的括号部分一样。alt部分为对图片的描述，可省略。</p>
+<p>若要更改图片的大小，可以使用以下语法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">&quot;/images/cat.png&quot;</span> width = <span class="string">&quot;300&quot;</span> height = <span class="string">&quot;200&quot;</span> alt=<span class="string">&quot;a cat&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>可以将图片设定为300x200尺寸大小。<br>也可以用百分比表示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">&quot;/images/cat.png&quot;</span> width=<span class="string">&quot;50%&quot;</span> height=<span class="string">&quot;50%&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入网络图片"><a href="#插入网络图片" class="headerlink" title="插入网络图片"></a>插入网络图片</h3><p>和插入本地图片的方法类似，只是把括号和引号内的内容换成网络图片的链接即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![](https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcbu01.alicdn.com%2Fimg%2Fibank%2F2013%2F911%2F003%2F849300119_1034603105.search.jpg&amp;refer=http%3A%2F%2Fcbu01.alicdn.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1643866229&amp;t=0240fb3f560c517cf504235362014f81)</span><br><span class="line">或者：</span><br><span class="line">&lt;img src=<span class="string">&quot;https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcbu01.alicdn.com%2Fimg%2Fibank%2F2013%2F911%2F003%2F849300119_1034603105.search.jpg&amp;refer=http%3A%2F%2Fcbu01.alicdn.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1643866229&amp;t=0240fb3f560c517cf504235362014f81&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="首页显示文章部分预览"><a href="#首页显示文章部分预览" class="headerlink" title="首页显示文章部分预览"></a>首页显示文章部分预览</h2><p>首页只预览部分内容，剩余内容需要点击阅读全文才能看到：<br>使用以下语法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;!--more--&gt; </span><br></pre></td></tr></table></figure>
+<p>语法后面的内容在首页看不到，只有点击阅读全文才能看到。</p>
+<h2 id="插入空格"><a href="#插入空格" class="headerlink" title="插入空格"></a>插入空格</h2><p>插入一个空格 (non-breaking space)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;nbsp;或&amp;<span class="comment">#160;或&amp;#xA0;</span></span><br></pre></td></tr></table></figure>
+<p>插入两个空格（en space）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;ensp;或&amp;<span class="comment">#8194；或&amp;#x2002；</span></span><br></pre></td></tr></table></figure>
+<p>插入四个空格（em space）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;emsp;或&amp;<span class="comment">#8195;或&amp;#x2003;</span></span><br></pre></td></tr></table></figure>
+<p>插入细空格（thin space）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;thinsp;或&amp;<span class="comment">#8201;或&amp;#x2009;</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：不要漏掉分号。</strong></p>
+<h2 id="PDF功能"><a href="#PDF功能" class="headerlink" title="PDF功能"></a>PDF功能</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-pdf</span><br></pre></td></tr></table></figure>
+
+<h3 id="建立页面"><a href="#建立页面" class="headerlink" title="建立页面"></a>建立页面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page PDF </span><br></pre></td></tr></table></figure>
+
+<p>该命令在souce文件夹里建立一个名为PDF的文件夹，文件夹内有一md文件，</p>
+<h3 id="配置文件更改"><a href="#配置文件更改" class="headerlink" title="配置文件更改"></a>配置文件更改</h3><ul>
+<li><strong>主题配置文件</strong>：_config.yml：</li>
+</ul>
+<p>　menu里添加PDF类别以及图标：</p>
+<p><img data-src="../images/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/image-20220105213935113.png"></p>
+<p>完成</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在PDF文件的.md文件里根据需求输入以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##外部链接：</span></span><br><span class="line">&#123;% pdf http://7xov2f.com1.z0.glb.clouddn.com/bash_freshman.pdf %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">##本地链接：</span></span><br><span class="line">&#123;% pdf ./pdf名字.pdf %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本地链接建议将pdf放在最初建立的PDF文件夹里：</p>
+<p><img data-src="../images/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/image-20220105214251153.png"></p>
+<p>.md文件输入命令：</p>
+<p><img data-src="../images/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/image-20220105214331296.png"></p>
+<p>这样就能在网站里看到这本书。</p>
+]]></content>
+      <categories>
+        <category>hexo教程</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pytorch代码结构总结梳理</title>
+    <url>/2022/01/08/pytorch%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93%E6%A2%B3%E7%90%86/</url>
+    <content><![CDATA[<p>代码结构 (！不完全)</p>
+<span id="more"></span>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><blockquote>
+<p>数据读取:OS.torch.utils.data.Dataset<br>数据变换:(torchvision.transforms)<br>数据增强:(mixip,cutput,cutmix)</p>
+</blockquote>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><blockquote>
+<p>torchvision.model, 可以调用resnet50,inceptionv4等网络结构</p>
+</blockquote>
+<h2 id="优化器及loss"><a href="#优化器及loss" class="headerlink" title="优化器及loss"></a>优化器及loss</h2><blockquote>
+<p>优化器optimizer：SGD,Adm等</p>
+<p>loss</p>
+</blockquote>
+<h2 id="训练函数"><a href="#训练函数" class="headerlink" title="训练函数"></a>训练函数</h2><blockquote>
+<p>sklearn kfold:</p>
+<p>for kfold:</p>
+<p>　　for i in range(num_epochs):</p>
+<p>　　　　　for image,label in dataloader:</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>-pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>test1</title>
+    <url>/2022/01/04/test1/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="e90f8ff37c20b95105188acc38ac931a37a7424d6c5466435fa281ce833818b4">4630436162ade97ba2718b7d0c4b3b636d5758fd5d23299054388fb1042541f42507ef3c8edb0c426107949bdb1aabca2907047a074e7755dc120f3152b03805d47f9ee2637a546646296232e733ee36705b36905d9c7267f3967408ae0b667f79c56ffc029cfba8ca791279a8eb30d4c65918a85c2b179afac6c16b14b6076b83d48ee7e24fdf93e13f15d433e17c9115df359de421f1c8309cd90be142936e9931533923e1f9d053ac50b954fb645e719620682ab70d1043f52b863fab15cd6798fe3e2799148abbd103c02056fd1f0abe06aa2f068e1fb6f7bd6db79a5ded5f886a7d70e33b7d0b8f346cc013275435e354e4f659d91449d0da90a4cdbeeff550bb6214c3984de383efc396c2b9985e21c0faabc01df1870ed663d3e96be0415f6dc810283eaa0e0b5dee7f55b38bb96dc07905899db0e3ff9eaf90e57f2a9fab0907857699c5fd251541289017c69a2a49f17d692b28319bb935f53daeb62ddc7833a04b5b6fef73a3bc57157303c5ae6f9c6ea3b55c89de9c009686b15a0d4f92a469f0fd3c62faaf936bb284ae3381e2b893d8b3d0426cabe1302e9f81aa0be2471946da43f0378cc0f3cba7c96bc150c1317f803ad8c59b758867bfbbfd1f42b0e1c8f887c4c31c23cf5a81323fda808451c4da8eb816897a77456e93882e783322d7c07bd6869aa9590d4a53f331ec1a8b640c2a099168e3040d9709105dd208dd7adf9dc7cbf9dad155cad18a9305a9f6415d9fbbd441855cfb6916e8195a7813b9baef468053b49012acf842c2330c31bc3507d155a155a940371123c62fc98ef6ed890c0ca6a23e066fd4e0f72ec2e6eef0b8fee82bc41ba1a26de9ff5fc64271f734a243b90e239827a2c82ecb167ddc130cf76c9a91c833182ef6f2a73efb2e2151ce1552737e9f88bc4649b92e8da12155f4134f87bbee2051b102f8e146a923b1acf6dfe6f50d3aa8c653f9ab3b337dc586d402112f69e20c971d6216cfd3410d6d4d32f420c179b64dfc234408d0031bb352c6a5e4c2b9f427a6ae36ae0cc37fa0b57869666c3cc624572fff0c3858955deacdfdabe9163de63b562a2b8a55edd3d6afdc4675cb6455f2221de87910bb18bcbae9ba565e8abc2ab0a8068d97438d935c02476072085c4f328a5e3342b4f50330538681952440aeca95fbad87ce50a219824171c3030f289016aa490ac444f75ee699734f2548bc86a250c950da571f665ef4482bae9dd8e33b8beff9167f39010e1ab4628f868a231430bea4a2cd0e44b9aa86528591cbaea2d49b59c9351d30cbe2f4c3a990d59c8775280c67231ba9c68cc3249c78cddcea465450da4b3113e615e4c11d6d6aec65ef13733393a25c0756d1ec9842b85b8c3d76a75e189ed754fab8db2ed0b5a8f8abe5d081948f207ff0ec23ae51690f193bc0eb4e1f9fef20d51f0b114e3ea33628558655498249011e36630c702b6f7f0d5cc6b80b5f25bb17342ba9f91212b41e5d577f61b9f3810255fafdb62c194111841c30a3d9214a5199c902334db0709c1dd17f56bc400af52264bdaa0b700975871a844f4e43adaf159631c706fe161e2a027deca88e806854ca849f25db44b1ba1b9fd832849090ad15945b5c077dff2aef4e67c21a623e817897bd343df9085601abf9661dcfd18b9d1a4a1d029e7d065938955e44ace1452981450281bd6bd230b82a2250c0bb230d42ab5913c0d7e8f96cefe9cee5b1a2b8a5d24dddb67ba6fd6beede24e35eaf688796b093535b5d4297c850481a19fbe23486eeaadfca241ba1cec11fdd3e3af55fbb28d7b60f0ae910c2dd9dcae22783f3173916a2a3779c0f938df2649337f9f78daba37f9b26eedd9d5007a2e56708aa7ce721b32712a14079469e277ea564795736834763b238e8853c28a85c44e66433ab2d51c328fdee768b5cf3d7912230a2dfa678d3c8eb0a8c961ee136ae6426413b3479b6a4b34d4f6f8a40a75086e692a6193c5db09046907c40567f9783db6f080538c369bbfc1962d61ef06521cff167b69a341c8f623df66d4d551c1f641d64e17323abf5e54b96928efe1fc847f2db421e08ebcd8e77a69c538cb4590ee5c4a7a6013d0b85682ac7d1d4ee4885a5b49f383cf6a904b4557d21d73d10fdab2358918db6701dceb23514d9a4bab216f36d49be3fc846c04fe9b8c0a84e8eb9588b41c069676ad2fc73a2e9eb5e8024e53e901f335c176677839f996515c9dc9c7c626cb736109155d620252c6e40463895b2a74417affe0b2fc0fd59b370195b6b033d4db55746415332fcca3ec93194813f49d8dec8eabaea1783113c7e4aee3b77befacc55720b352ee9802e763d2a628d8ee75982059dd44f99308ae2f6befe4424adc342d0b74f83b709a7b73cf2c067358399e12ce200f3da2e1944c75dce5506a39f593a3b32e38803cd6a7f42a3d4bb4693cc62a40bbf4bca769d030e069d65d497e88134cc838c583cb0a9fac6baca59791609fcc691e227878e41889a34cb8b28b34aaffadc26631cf2f9b274f3f1cd07564618d90b080f1a6cd82d39488c10cec63604930d86428e85b7fa820da299fb974993535c90dba83040a15749e9c40653ea0b5f5fe6a2c6b38f5ff99802510cc1d96dd671cf5ced95d94b42112e78d5972e2b0d4d4e3d5db9d61c6cf18933a1b358bca3b2d4f6ca9c3ab19009d48f0544c0df4cfeb7a63fdca4fe60f6cb04a5908c5fe2e5a6f5a80d63f35a7d9f9ddb933b247f1baf0940d97ec9a116d4003b6a0225f4cb754b29bd</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">情书密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+  </entry>
+  <entry>
+    <title>目标检测算法综述</title>
+    <url>/2022/01/04/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95%E7%BB%BC%E8%BF%B0/</url>
+    <content><![CDATA[<p>本文总结了近十年来常用的目标检测算法的基本原理和结构。包括R-CNN,SPP-Net,Fast R-CNN,Faster R-CNN,YOLO,SSD</p>
+<span id="more"></span>
+
+<h2 id="目标检测算法发展历程"><a href="#目标检测算法发展历程" class="headerlink" title="目标检测算法发展历程"></a>目标检测算法发展历程</h2><img data-src="/images/目标检测算法发展历程.png" alt="目标检测算法发展历程图">
+&emsp;2012年之前，都是传统的目标检测算法，传统的目标检测算法采用类似穷举的滑动窗口方式或图像分割技术来生成大量的候选区域，然后对每一个候选区域提取图像特征(包括HOG、SIFT、 Haar等)，并将这些特征传递给一个分类器(如 SVM、Adaboost和 Ｒandom Forest等) 用来判断该候选区域的类别．由于传统方法提取的特征存在局限性，产生候选区域的方法需要大量的计算开销，检测的精度和速度远远达不到实际应用的要求这使得传统目标检测技术研究陷入了瓶颈。
+&emsp;2012年后，将深度学习应用在目标检测领域，检测的速度和准确度有个飞速的进步，目标检测开始进去发展的新时期。
+
+<h2 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h2><p><em><a href="https://sci-hub.se/10.1109/cvpr.2014.81">（原论文）</a></em></p>
+<p>&emsp;&emsp;2014 年，Girshick 等人成功将卷积神经网络 ( Convolutional Neural Networks，CNN) 运用在目标检测领域中，提出了Ｒ-CNN 算法，它将 AlexNet与选择性搜索( selective search)算法相结合，把目标检测任务分解为若干个独立的步骤。</p>
+<h3 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h3><ul>
+<li>输入图像，利用SS算法在图片中找到2000个候选区域</li>
+<li>将2000个候选区域进行大小变换，得到固定尺寸227x227，然后输入到神经网络中，进行区域特征提取</li>
+<li>经过20个类别的SVM分类器，对于2000个候选区域进行判断，得到类别信息</li>
+<li>对候选区域做NMS，去除不好的，重叠度高的一些候选区域</li>
+<li>修正候选区域  <img data-src="/images/R-CNN流程图.png" alt="R-CNN流程图"></li>
+</ul>
+<h3 id="部分概念"><a href="#部分概念" class="headerlink" title="部分概念"></a>部分概念</h3><p>(1)IoU<br>&emsp;简单理解就是交并比，即：两个候选框的交集/并集。取值在0和1之间。<br>(2)NMS<br>&emsp;非极大值抑制（Non-Maximum Suppression，NMS），顾名思义就是抑制不是极大值的元素，用于目标检测中，就是提取置信度高的目标检测框，而抑制置信度低的误检框。<br>它的基本步骤是:<br>&emsp;&emsp;1.寻找得分最高的候选框；<br>&emsp;&emsp;2.计算其他候选框与该候选框的IoU值；<br>&emsp;&emsp;3.删除所有IoU值中大于给定阈值的候选框。<br>&emsp;IoU值大，说明这两个候选框重叠部分多，说明这两个候选框选定的是同一个目标，所以要删掉得分较低的候选框。</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点：<br>&emsp;使目标检测的精度得到了质的改变，是将深度学习应用到目标检测领域的里程碑之 作，同时也奠定了基于深度学习的双阶段目标检测算法的基础。<br>缺点：<br>&emsp;选出的区域多数都是互相重叠，重叠部分会被多次重复提取特征，导致重复计算，比较耗时。</p>
+<h2 id="SPP-Net"><a href="#SPP-Net" class="headerlink" title="SPP-Net"></a>SPP-Net</h2><p><em><a href="https://arxiv.org/abs/1406.4729">原论文</a></em></p>
+<p>　　2014 年 He 等人提出了空间金字塔网络( Spatial Pyramid Pooling Network，SPP-Net) 检测算法，它在 CNN 最后一层卷积层和全连接层之间加入 SPP 层，使得网络能够输入任意尺度的候选区域，从而每张输入图片只需一次 CNN 运算，就能得到所有候选区域的特征，这使得计算量大大减少。</p>
+<h3 id="基本步骤-1"><a href="#基本步骤-1" class="headerlink" title="基本步骤"></a>基本步骤</h3><ul>
+<li>图片输入网络，得到全图的feature map；</li>
+<li>原图经过SS算法得到的候选区域直接映射全图的feature map，得到每个候选区域的特征向量；</li>
+<li>映射出来的候选区域的特征向量经过SSP层，输出固定大小的特征向量给全连接层  <img data-src="/images/SPP-Net.png" alt="SPP-Net流程图"></li>
+</ul>
+<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点:<br>&emsp;&emsp;引入了空间金字塔，适应各种不同尺寸的特征图；<br>&emsp;&emsp;对整张图进行一次特征提取，加速运算速度，并提出了权重共享的策略。<br>缺点：<br>&emsp;&emsp;分类器使用SVM，训练依然过慢，效率低；<br>&emsp;&emsp;进行分阶段训练，训练步骤复杂。</p>
+<h2 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h2><p><em><a href="https://arxiv.org/abs/1504.08083">原论文</a></em></p>
+<p>　　2015 年,Girshick 等人提出了Fast Ｒ-CNN算法,他们受到SPP-Net算法的启发,将SPP层简化成单尺度的ＲOI Pooling 层以统一候选区域特征的大小,而且进一步提出了多任务损失函数思想,将分类损失和边界框回归损失统一训练学习,使得分类和定位任务不仅可以共享卷积特征,还可以相互促进提升检测效果。</p>
+<h3 id="基本步骤-2"><a href="#基本步骤-2" class="headerlink" title="基本步骤"></a>基本步骤</h3><ul>
+<li>一张图片经过SS算法生成2k个候选区域</li>
+<li>整个图像输入卷积神经网络得到整个图像的feature map，将SS算法得到的候选框映射到feature map上得到每个候选区域的特征向量</li>
+<li>每个特征矩阵通过RoI pooling层缩放到7x7大小的特征图，接着展平特征图送入到一系列的全连接层。</li>
+</ul>
+<img data-src="/images/Fast R-CNN.png" alt="Fast R-CNN" style="zoom: 67%;" />
+
+
+<h3 id="优缺点-2"><a href="#优缺点-2" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点：</p>
+<ul>
+<li>使用Softmax去代替SVM进行多分类的预测，从而实现了端到端的训练；</li>
+<li>引入ROI pooling，速度更快<br>缺点：</li>
+<li>依然需要SS算法产生候选区域，速度慢。</li>
+</ul>
+<h2 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h2><p><em><a href="https://proceedings.neurips.cc/paper/2015/file/14bfa6bb14875e45bba028a21ed38046-Paper.pdf">原论文</a></em></p>
+<p>　　2015年Ｒen等人提出了 Faster Ｒ-CNN 算法框架 ,设计了辅助生成样本的ＲPN 取代选择性搜索算法。ＲPN是一种全卷积神经网络 (FCN) 结构,它将任意大小的特征图作为输入,经过卷积操作后产生一系列可能包含目标的候选区域,使算法实现了端到端的训练。</p>
+<h3 id="基本步骤-3"><a href="#基本步骤-3" class="headerlink" title="基本步骤"></a>基本步骤</h3><ul>
+<li>整张图像输入网络得到特征图feature map；</li>
+<li>使用RPN结构生成候选框，将RPN后生成的候选框映射到特征图上得到每个候选框的特征矩阵；</li>
+<li>将每个特征矩阵通过RoI pooling，得到7x7大小的特征图，接着展平特征图，通过一系列的全连接层得到预测结果</li>
+</ul>
+<img data-src="/images/Faster R-CNN.png" style="zoom: 67%;" />    
+
+<h3 id="优缺点-3"><a href="#优缺点-3" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点：</p>
+<ul>
+<li>ＲPN 的使用，使Faster Ｒ-CNN 能够将网络中区域建议、特征提 取、分类及定位多个步骤整合到一起，真正成为端到端的训练。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>Faster Ｒ-CNN特征图上的一个锚点框对应于原图中一块较大区域，因此，Faster Ｒ-CNN对小目标检测效果不是很好。</li>
+</ul>
+<h2 id="YOLO"><a href="#YOLO" class="headerlink" title="YOLO"></a>YOLO</h2><p><em><a href="https://arxiv.org/pdf/1506.02640.pdf">原论文</a></em></p>
+<p>　　2015年Redmon等人提出了YOLO算法，将分类、定位、检测功能融合在一个网络当中，输入图像只需要经过一次网络计算，就可以直接得到图像中目标的边界框和类别概率。</p>
+<h3 id="基本步骤-4"><a href="#基本步骤-4" class="headerlink" title="基本步骤"></a>基本步骤</h3><ul>
+<li>一幅图片分成s*s个网格（grid cell），如果某个目标的中心点落在某个网格里，那么该网络负责预测该物体。</li>
+<li>每个网格预测B个bounding box，每个bbox除了要预测bbox的位置外，还要预测一个置信度（confidence）的值每个网格还要预测c个类别的分数。</li>
+</ul>
+<p>原论文里，s = 7，B = 2，c = 20</p>
+<img data-src="/images/yolov1流程.png" alt="yolov1流程" style="zoom:67%;" />
+
+<h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>整体结构：</p>
+<p><img data-src="/images/YOLOv1.png" alt="YOLOv1"></p>
+<p>最终输出7x7x30的张量的结构图为：</p>
+<img data-src="/images/image-20220104190735017.png" alt="image-20220104190735017" style="zoom: 50%;" />
+
+<p>其中7为最初每张图片分成7x7个网格。每个bounding box预测四个位置信息，一个置信度信息，一个网格预测两个bounding box，所以，一个网格包含十个特征信息。又因为共预测20类目标，所以还有二十个类别信息，因此，一共20+10=30个信息。</p>
+<h3 id="优缺点-4"><a href="#优缺点-4" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点：</p>
+<ul>
+<li>Yolo采用一个CNN网络来实现检测，是单阶段检测框架，所以Yolo算法比较简洁且速度快。</li>
+<li>由于Yolo是对整张图片做卷积，所以其在检测目标有更大的视野，它不容易对背景误判。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>虽然每个格子可以预测B个bounding box，但是最终只选择只选择IOU最高的bounding box作为物体检测输出，即每个格子最多只预测出一个物体。当物体占画面比例较小，或每个格子包含多个物体，但却只能检测出其中一个。这是YOLO方法的一个缺陷。</li>
+</ul>
+<h3 id="YOLO的演变"><a href="#YOLO的演变" class="headerlink" title="YOLO的演变"></a>YOLO的演变</h3><p>　　为了克服 YOLO v1 检测速度快，但检测精度低的问题， YOLO v2算法引入BN ( batch normalization) 、多尺度训练、锚框机制和细粒度特征等方法对YOLO v1 算法进行改进。YOLO v3算法在YOLO v2 的基础上，采用更好的主干网络、多尺度预测和 9 个锚框进行检测，使得检测算法在保证实时性的同时，精度提高。近几年又发展出了yolo v4，yolo v5网络。</p>
+<h2 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h2><p><em><a href="https://arxiv.org/pdf/1512.02325.pdf">原论文</a></em></p>
+<p>　　2016 年 Liu 等人提出了 SSD 算法，在回归思想的基础上，有效结合多尺度检测的思想，提取多个不同尺度的特征图进行检测，遵循较大的特征图用来检测相对较小的目标，较小的特征图检测较大目标的策略，显著提高了对大目标的检测效果，对小目标检测也有一定的提升。</p>
+<h3 id="基本步骤-5"><a href="#基本步骤-5" class="headerlink" title="基本步骤"></a>基本步骤</h3><p><img data-src="/images/image-20220104191429817.png" alt="image-20220104191429817"></p>
+<p>VGG-16模型：</p>
+<p><img data-src="/images/image-20220104191707498.png" alt="image-20220104191707498"></p>
+<h3 id="优缺点-5"><a href="#优缺点-5" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点：</p>
+<ul>
+<li>将不同层次的特征图进行融合，提升了速度和检测精度。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>但 SSD 算法提取的不同卷积层特征独立输入各自的检测分支，容易出现同一个物体被不同大小的边界框同时检测出来的情况，即重复检测问题。而 且每层的检测分支仅关注自己分支上特定尺度的目标，没有考虑到 不同层、不同尺度目标间的关联性，所以对小目标检测效果一般。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+        <category>目标检测</category>
+        <category>综述</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>目标检测</tag>
+        <tag>综述</tag>
+        <tag>RNN</tag>
+        <tag>YOLO</tag>
+        <tag>SSD</tag>
+      </tags>
+  </entry>
+</search>
