@@ -29,7 +29,7 @@
     <content><![CDATA[<p>Pytorch版Faster R-CNN代码的一些解析。(不断更新中…)</p>
 <span id="more"></span>
 
-<h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ul>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
 <li><p>图像输入网络得到特征图</p>
 </li>
 <li><p>使用RPN结构生成候选框，将RPN生成的候选框投影到特征图上获得相应的特征矩阵</p>
@@ -37,10 +37,10 @@
 <li><p>将每个特征矩阵通过RoI pooling层缩放到7x7大小的特征图，接着将特征图展平通过一系列全连接层得到预测效果</p>
 </li>
 </ul>
-<p>可以看成RON+Faster R-CNN</p>
-<h1 id="源码来源"><a href="#源码来源" class="headerlink" title="源码来源"></a>源码来源</h1><p>源码，数据集，backbone等文件：</p>
+<p>可以看成RPN+Faster R-CNN</p>
+<h2 id="源码来源"><a href="#源码来源" class="headerlink" title="源码来源"></a>源码来源</h2><p>源码，数据集，backbone等文件：</p>
 <p><a href="https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection/faster_rcnn">Github</a></p>
-<h1 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h1><ul>
+<h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><ul>
 <li>backbone:特征提取网络</li>
 <li>network_files:Faster R-CNN网络（包括Faster RCNN以及RPN等模块）</li>
 <li>train_utils:训练验证相关模块（包括cocotools）</li>
@@ -52,16 +52,57 @@
 <li>validation.py: 利用训练好的权重验证/测试数据的COCO指标，并生成record_mAP.txt文件</li>
 <li>pascal_voc_classes.json: pascal_voc标签文件</li>
 </ul>
-<h1 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h1><p>Pascal VOC2012 [bilibili](<a href="https://www.bilibili.com/video/BV1kV411k7D8?spm_id_from=333.999.0.0">PASCAL VOC2012数据集讲解与制作自己的数据集_哔哩哔哩_bilibili</a>)</p>
+<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p>Pascal VOC2012 <a href="https://www.bilibili.com/video/BV1kV411k7D8?spm_id_from=333.999.0.0">PASCAL VOC2012数据集讲解与制作自己的数据集_哔哩哔哩_bilibili</a></p>
 <ul>
 <li>分为四大类：交通工具，家具，动物，其他(人)，共二十个类别</li>
 </ul>
 <p>文件目录：</p>
-<p><img src="../images/Faster_R-CNN/image-20220106191434379.png"></p>
-<p><img src="../images/Faster_R-CNN/fasterRCNN.png"></p>
-<p><img src="../images/Faster_R-CNN/webp.png"></p>
-<p><img src="../images/Faster_R-CNN/v2-40629f919ca3a77111ea43cac464329b_r.jpg"></p>
-<h1 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h1><h2 id="train-mobilenetv2"><a href="#train-mobilenetv2" class="headerlink" title="train_mobilenetv2"></a>train_mobilenetv2</h2><p>1.creat_model 函数部分 </p>
+<img src="../images/Faster_R-CNN/image-20220106191434379.png" style="zoom:80%;" />
+
+
+
+<img src="../images/Faster_R-CNN/fasterRCNN.png" style="zoom:80%;" />
+
+
+
+
+
+<img src="../images/Faster_R-CNN/webp.png" style="zoom:80%;" />
+
+
+
+
+
+<img src="../images/Faster_R-CNN/v2-40629f919ca3a77111ea43cac464329b_r.jpg" style="zoom:80%;" />
+
+<h2 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2><h3 id="基本过程"><a href="#基本过程" class="headerlink" title="基本过程"></a>基本过程</h3><p>1.transform：主要是resize操作以及部分细节。训练时resize的大小是随机的，也就是一个batch中的图片size不全相同，但为了保证图片的tensor的shape一致，采用零填充。</p>
+<p>2.backbone：将resize后的图片输入到backbone网络中，得到多尺度的feature_maos</p>
+<p>3.RPN:feature_maps经过RPN网络，得到proposals（候选区域）</p>
+<ul>
+<li>anchor_generator:为每个grid生成面积相同，长宽比不同的三个cnahor（长宽比分别为0.5,1,2）</li>
+<li>rpn_head:在feature_maps上为每个grid生成一个置信度objectness（表示预测为目标的概率，目标置信度为1，背景置信度为0）；为每个grid生成4个pred_box_deltas[dpx、dpy、dpw、dph]表示预测框相对于anchor的偏移量。</li>
+<li>compute_loss:编码encode得到groud_truth[gx,gy,gw,gh]相对于anchor[ax,ay,aw,ah]的偏移量[dgx,dgy,dgw,dgh]。<ul>
+<li>在计算loss前，还要进行正负样本平衡；平衡方法为随机采样，使得正样本数目/总采样样本数=positive_fraction,positive+fraction人为设定。</li>
+<li>接着判断每个bbox是正样本还是负样本，还是忽略样本。当bbox与gt的iou大于high_threshold时，label为1即目标-正样本；当bbox与gt的iou小于low_threshold时，label为0即背景-负样本；当bbox与gt的iou介于两者之间，label为-1即ignore忽略。<strong>但有一些特殊情况</strong>，比如有一个groud-truth和所有的bbox的iou都小于high_threshold，那么我们允许“与这个gt最大iou的bbox”被认为是正样本，确保每个gt都有配对的bbox。</li>
+<li>接下来计算loss：<ul>
+<li>计算置信度objectness与labels的交叉熵loss即为<strong>置信度loss。注意：这里计算正样本和负样本的置信度loss，不计算iou介于high_threshold和low_threshold之间的样本的置信度loss。</strong></li>
+<li>计算pred_box_deltas[dpx、dpy、dpw、dph]与[dgx、dgy、dgw、dgh]的L1_loss即为<strong>bbox回归loss。注意：这里只计算正样本的bbox回归loss。</strong></li>
+</ul>
+</li>
+<li>根据pred_box_deltas[dpx、dpy、dpw、dph]和anchor[ax、ay、aw、ah]解码decode计算出预测框[px、py、pw、ph]。</li>
+<li>通过filter_proposals对proposal进行过滤，主要包括：<ul>
+<li>首先根据置信度对proposal进行降序排序，<strong>最多</strong>选择前pre_nms_topn（人为设定，默认2000）</li>
+<li>然后对超出图片范围的proposal进行clip剪裁</li>
+<li>去除面积太小的prposals</li>
+<li>进行nms操作，<strong>注意这里在不同level的feature_map上产生的proposal，它们之间独立地进行nms操作。</strong></li>
+<li>最后对nms的结果根据置信度进行降序排序，<strong>最多</strong>返回前post_nms_topn（默认2000）个proposals，若nms后bbox数量小于post_nms_topn，全部都送入roi_head层。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>4.<strong>roi_head</strong> ：</p>
+<h3 id="train-mobilenetv2"><a href="#train-mobilenetv2" class="headerlink" title="train_mobilenetv2"></a>train_mobilenetv2</h3><p>1.creat_model 函数部分 </p>
 <ul>
 <li>backbone的选择，<ul>
 <li>设置对应输出backbone矩阵的channels</li>
@@ -95,13 +136,13 @@
 </ul>
 </li>
 </ul>
-<h2 id="train-res50-fpn-py"><a href="#train-res50-fpn-py" class="headerlink" title="train_res50_fpn.py"></a>train_res50_fpn.py</h2><p>和mobilenet大体相似</p>
+<h3 id="train-res50-fpn-py"><a href="#train-res50-fpn-py" class="headerlink" title="train_res50_fpn.py"></a>train_res50_fpn.py</h3><p>和mobilenet大体相似</p>
 <p>只是不需要冻结backbone，可以直接训练整个模型</p>
-<h2 id="spilt-data-py"><a href="#spilt-data-py" class="headerlink" title="spilt_data.py"></a>spilt_data.py</h2><p>生成train.txt和val.txt，将数据集划分为训练集和验证集</p>
+<h3 id="spilt-data-py"><a href="#spilt-data-py" class="headerlink" title="spilt_data.py"></a>spilt_data.py</h3><p>生成train.txt和val.txt，将数据集划分为训练集和验证集</p>
 <ul>
 <li>main方法</li>
 </ul>
-<h2 id="my-dataset-py"><a href="#my-dataset-py" class="headerlink" title="my_dataset.py"></a>my_dataset.py</h2><p>调用已有数据集或构建自己的数据集</p>
+<h3 id="my-dataset-py"><a href="#my-dataset-py" class="headerlink" title="my_dataset.py"></a>my_dataset.py</h3><p>调用已有数据集或构建自己的数据集</p>
 <p>1.VOCDataset类，继承父类Dataset</p>
 <ul>
 <li>初始化方法</li>
@@ -111,7 +152,7 @@
 <li>len方法</li>
 <li>getiten方法</li>
 </ul>
-<h2 id="transform-py"><a href="#transform-py" class="headerlink" title="transform.py"></a>transform.py</h2><p>1._resize_image_onnx函数</p>
+<h3 id="transform-py"><a href="#transform-py" class="headerlink" title="transform.py"></a>transform.py</h3><p>1._resize_image_onnx函数</p>
 <p>可忽略，用于不同框架之间</p>
 <p>2._resize_image函数</p>
 <ul>
@@ -250,16 +291,16 @@
 <li>边界框的这四个坐标参数分别乘以缩放因子ratios，得到缩放后的边界框的坐标</li>
 <li>利用torch.stack方法在维度1上进行合并，得到boxes的shape</li>
 </ul>
-<h2 id="rpn-function-py"><a href="#rpn-function-py" class="headerlink" title="rpn_function.py"></a>rpn_function.py</h2><p>RPNHead类，继承nn.Module父类</p>
+<h3 id="rpn-function-py"><a href="#rpn-function-py" class="headerlink" title="rpn_function.py"></a>rpn_function.py</h3><p><strong>RPNHead类，继承nn.Module父类</strong></p>
 <p>通过滑动窗口计算预测目标概率与bbox regression参数</p>
 <p><img src="../images/Faster_R-CNN/v2-e976c793df59fd9e93796f30319652d8_720w.jpg"></p>
-<p>1.init函数：</p>
+<p>1.init方法：</p>
 <ul>
 <li>定义一个3x3滑动窗口；根据公式，卷积后并不会改变feature_map的size</li>
 <li>预测器卷积层：计算预测的目标分数，1x1的卷积，H、W不变，channel改变。channel从in_channels变成num_anchors</li>
 <li>计算预测的目标bbox regression参数：1x1的卷积，H、W不变，channel改变。channel通道数从in_channels变成num_anchors*4。（4是因为对于每个anchor都会预测四个回归偏移量）</li>
 </ul>
-<p>2.forward函数：正向传播过程</p>
+<p>2.forward方法：正向传播过程</p>
 <ul>
 <li><p>遍历每一个预测特征层，将预测特征层通过3x3滑动窗口和relu激活函数，得到输出特征矩阵t</p>
 </li>
@@ -271,20 +312,24 @@
 </li>
 </ul>
 <p>3.</p>
-<p>AnchorsGenerator类(继承nn.Module父类)</p>
+<p><strong>AnchorsGenerator类(继承nn.Module父类)</strong></p>
 <p>1.init函数：初始化</p>
+<p>引入：</p>
+<p>sizes：anchor的面积（尺度）：(128^2,256^2,512^2)</p>
+<p>aspect_ratios:每个anchor采用的比例（长宽比）：（0.5，1，2）</p>
+<p>​    </p>
 <p>2.forward函数：正向传播过程</p>
 <p>传入：image_sizes（image_list.py）和feature_maps</p>
 <ul>
-<li><p>for循环遍历feature_maps，获取每个预测特征层的尺寸</p>
+<li><p>for循环遍历feature_maps，获取每个预测特征层（feature_map）的尺寸H和W</p>
 </li>
-<li><p>获取输入图像的height和width</p>
+<li><p>获取输入图像（image_list）的height和width</p>
 </li>
 <li><p>获取变量类型和设备信息</p>
 </li>
 <li><p>计算特征层上每一步等于原始图像上的步长</p>
 </li>
-<li><p>根据提供的size和aspect_ratios生成anchors模板。需要调用set_cell_anchors函数</p>
+<li><p>根据提供的size和aspect_ratios生成anchors模板。需要调用set_cell_anchors方法</p>
 </li>
 <li><p>将得到的模板映射回原图，使用cached_grid_anchors函数</p>
 </li>
@@ -334,7 +379,7 @@
 <p>1.init函数：初始化函数</p>
 <p>传入：anchor_generator：生成anchor</p>
 <p>　　　head：生成置信度objectness和预测框相对于anchor的偏移量</p>
-<p>　　　fg_iou_thresh：fg表示frontgroud即目标，若anchor与gt的iou大于fg_iou_thresh，则被认为目标，默　　　　　　　　认为0.7</p>
+<p>　　　fg_iou_thresh：fg表示frontgroud即目标，若anchor与gt的iou大于fg_iou_thresh，则被认为目标，默认为0.7</p>
 <p>　　　bg_iou_thresh：bg表示backgroud即背景，若anchor与gt的iou小于bg_iou_thresh，则被认为背景，默认为0.3</p>
 <p>　　　batch_size_per_image：training时，需要正负样本平衡，表示每张图片采样batch_size_per_image个样本</p>
 <p>　　　positive_fraction：表示正负样本平衡的正样本比例，正样本数=batch_size_per_image*positive_fraction</p>
@@ -364,7 +409,17 @@
 </li>
 <li><p>调整内部tensor格式以及shape。调用concat_box_prediction_layers函数（RPNhead类）</p>
 </li>
-<li><p>通过decode方法将预测的bbox regression参数应用到anchors上得到最终预测box坐标</p>
+<li><p>通过decode方法(det_utils.py)将预测的bbox regression参数应用到anchors上得到最终预测bbox坐标</p>
+</li>
+<li><p>利用filter_proposals方法：筛除小boxes框，nms处理，根据预测概率获取前post_nms_top_n个目标</p>
+</li>
+<li><p>如果是训练模式，就求取损失</p>
+<ul>
+<li>利用assign_targets_to_anchors方法计算每个anchors最匹配的gt，并将anchors进行分类，前景，背景以及废弃的anchors</li>
+<li>利用encode方法（det_utils.py）：结合anchors以及对应的gt，计算regression参数</li>
+<li>compute_loss方法：预测的目标分数，预测的坐标偏移量，真实的labels，每个anchors对应的gt_bbox相对于anchors的回归参数</li>
+<li></li>
+</ul>
 </li>
 </ul>
 <p>3.concat_box_prediction_layers函数（RPNhead类）：</p>
@@ -373,7 +428,7 @@
 <li>遍历每个预测特征层</li>
 <li>permute_and_flatten函数对参数进行展平，处理后得到[N,-1,C]格式，添加到创建的用来存储预测的目标分数的空列表中</li>
 <li>同样使用permute_and_flatten函数进行处理，得到[N,-1,C]格式，添加到创建回归参数的空列表中</li>
-<li>box_cls_flattened在维度1上进行拼接， 在（0，-1）维度上进行展平</li>
+<li>box_cls_flattened在维度1上进行拼接， 在（0，-2）维度上进行展平</li>
 <li>box_regression_flattened在维度1上进行拼接，在特定维度上进行展平</li>
 </ul>
 <p>4.permute_and_flatten函数：调整tensor顺序，并进行reshape</p>
@@ -382,6 +437,63 @@
 <li>permute方法进行调换tensor维度:[N,H,W,-1,C]</li>
 <li>reshape方法得到：[N,-1,C]</li>
 </ul>
+<p>5.filter_proposals方法：筛除小的boxes框，nms处理，根据预测概率获得前post_nms_top_n个目标</p>
+<ul>
+<li>获取图像个数和设备信息</li>
+<li>detach方法对预测值进行处理，再进行reshape处理</li>
+<li>levels负责记录分隔不同预测特征层上的anchors索引信息</li>
+<li>将levels进行reshape处理，再通过expand_as方法进行复制</li>
+<li>获取每张预测特征图上预测概率排前pre_nums_top_n的anchors索引值</li>
+</ul>
+<p>6._git_top_n_idx方法：</p>
+<ul>
+<li>建立空列表r来记录每个预测特征层上预测目标概率前pre_nums_top_n的索引信息</li>
+<li>遍历每个预测特征层上的预测目标概率信息</li>
+</ul>
+<p>7.assign_targets_to_anchors方法：计算每个anchors最匹配的gt，并划分为正样本，背景以及废弃的样本</p>
+<ul>
+<li>创建两个空列表，分别用来存储anchors匹配的标签和gtbox</li>
+<li>for循环遍历每张图片的anchors和targets</li>
+<li>计算gt_boxes和anchors的IoU的值</li>
+<li>计算每个anchors与gt匹配IoU最大的索引，（如果IoU&lt;0.3，索引为-1，如果0.3&lt;IoU&lt;0.7，索引为-2）</li>
+<li>将gt_boxes负样本和丢弃的样本的索引全设置为0（对最终的回归损失无影响）</li>
+</ul>
+<p>9.compute_loss方法：</p>
+<p>按照给定的batch_size_per)image </p>
+<h3 id="det-utils-py"><a href="#det-utils-py" class="headerlink" title="det_utils.py"></a>det_utils.py</h3><p>BoxCoder类</p>
+<p>1.decode方法：</p>
+<p>rel_codes:预测的目标边界框的回归参数</p>
+<p>boxes：anchors坐标</p>
+<ul>
+<li><p>遍历boxes得到每张图片生成的anchors数目</p>
+</li>
+<li><p>boxes在第0个维度进行拼接</p>
+</li>
+<li><p>通过decode_single方法将预测的bbox回归参数应用到对应anchors上得到预测bbox的坐标pred_boxes</p>
+</li>
+<li><p>进行reshap为（box_sum,-1,4）</p>
+</li>
+</ul>
+<p>2.decode_single方法：</p>
+<ul>
+<li><p>将boxed变量设置为和rel_codes一样的格式</p>
+</li>
+<li><p>求得anchor的宽度、高度、中心x坐标、中心y坐标</p>
+</li>
+<li><p>预测anchors的中心坐标x回归参数、y回归参数、宽度回归参数、高度回归参数</p>
+</li>
+<li><p>clamp方法限制数值上下限</p>
+</li>
+<li><p>得到proposal的坐标和宽高度</p>
+</li>
+<li><p>转换为左上角x，y坐标和右下角x，y坐标</p>
+</li>
+<li><p>利用stack方法新增维度，在新维度进行拼接，再在1维度利用flatten进行展平</p>
+</li>
+<li></li>
+</ul>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><a href="https://zhuanlan.zhihu.com/p/390140081">保姆级 faster rcnn 源码逐行解读—概览 - 知乎</a> </p>
+<p><a href="https://www.bilibili.com/video/BV1of4y1m7nj?p=1">Faster RCNN源码解析(pytorch)哔哩哔哩</a> </p>
 ]]></content>
       <categories>
         <category>深度学习</category>
