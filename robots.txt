@@ -10,5 +10,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: http://wshuai123.github.io/sitemap.xml
-Sitemap: http://wshuai123.github.io/baidusitemap.xml
+Sitemap: http://www.wshuai.xyz/sitemap.xml
+Sitemap: http://www.wshuai.xyz/baidusitemap.xml
