@@ -600,7 +600,7 @@
     <content><![CDATA[<p>本文介绍hexo博客的一些基本操作方法：</p>
 <span id="more"></span> 
 
-<h2 id="插入语法框"><a href="#插入语法框" class="headerlink" title="插入语法框"></a>插入语法框</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/```bash</span><br><span class="line">要输入的语法</span><br><span class="line">/```</span><br></pre></td></tr></table></figure>
+<h2 id="插入语法框"><a href="#插入语法框" class="headerlink" title="插入语法框"></a>插入语法框</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/```bash</span><br><span class="line">要输入的语法 </span><br><span class="line">/```</span><br></pre></td></tr></table></figure>
 <p><strong>注意：为了防止编译加入的/，在实际应用中要去掉/</strong></p>
 <h3 id="插入本地图片"><a href="#插入本地图片" class="headerlink" title="插入本地图片"></a>插入本地图片</h3><p>需要将要插入的本地图片保存在博客根目录里source/images文件夹内。若没有images文件夹则新建一个，命名可自定。<br>然后加入以下代码：<br><strong>方法一：</strong></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![]()</span><br></pre></td></tr></table></figure>
@@ -630,6 +630,10 @@
 <p>插入细空格（thin space）</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;thinsp;或&amp;<span class="comment">#8201;或&amp;#x2009;</span></span><br></pre></td></tr></table></figure>
 <p><strong>注意：不要漏掉分号。</strong></p>
+<h2 id="创建新页面"><a href="#创建新页面" class="headerlink" title="创建新页面"></a>创建新页面</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page pagename</span><br></pre></td></tr></table></figure>
+
+<p>即可在hexo/myblog/source创建一个名为“pagename”的文件夹，并自动生成.md文件</p>
+<p>在站点配置文件添加上即可以在首页添加新的菜单</p>
 <h2 id="PDF功能"><a href="#PDF功能" class="headerlink" title="PDF功能"></a>PDF功能</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-pdf</span><br></pre></td></tr></table></figure>
 
 <h3 id="建立页面"><a href="#建立页面" class="headerlink" title="建立页面"></a>建立页面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page PDF </span><br></pre></td></tr></table></figure>
@@ -692,12 +696,29 @@
     <div class="hbe hbe-input hbe-input-default">
       <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
       <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">情书密码</span>
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码：</span>
       </label>
     </div>
   </div>
 </div>
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+  </entry>
+  <entry>
+    <title>解决next博客文章目录点击不跳转的问题</title>
+    <url>/2022/01/17/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E7%82%B9%E5%87%BB%E4%B8%8D%E8%B7%B3%E8%BD%AC%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>解决中文环境下next主题博客目录点击不跳转的问题</p>
+<span id="more"></span>
+
+<p>博客的目录点击不跳转，该bug发生在中文语言的目录里。</p>
+<p>打开我们博客的文章页面，键盘F12打开网页的控制台，点击文章目录，控制台会报出如下错误：</p>
+<p><img src="../images/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E7%82%B9%E5%87%BB%E4%B8%8D%E8%B7%B3%E8%BD%AC%E9%97%AE%E9%A2%98/76d53c14f481c189b57e13fe048692d0f6ec0965.png@830w_242h_progressive.webp"></p>
+<p>根据提示，我们可以发现utils.js文件的第243行出现问题。</p>
+<p>我们打开主题的themes\next\source\js文件夹，打开utils.js文件，定位到240行附近，根据GitHub上的解决方法，删除以及添加几行，即可解决该问题，</p>
+<p><a href="https://github.com/theme-next/hexo-theme-next/pull/1540/commits/ec521c927dc10255977324284c1c667f2e220da7#diff-1792ad8339d1eed2d547ed3d50641a26797c40e48aadd09521293105d88f158cR245">GitHub链接</a></p>
+<p>改成如图所示：</p>
+<p><img src="../images/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E7%82%B9%E5%87%BB%E4%B8%8D%E8%B7%B3%E8%BD%AC%E9%97%AE%E9%A2%98/image-20220117220110124.png"></p>
+<p>保存，即可解决该bug。</p>
+]]></content>
   </entry>
   <entry>
     <title>目标检测算法综述</title>
