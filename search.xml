@@ -488,26 +488,207 @@
       </tags>
   </entry>
   <entry>
-    <title>Pytorch中用到的陌生python命令</title>
-    <url>/2022/01/06/2022-01-06-Pytorch%E4%B8%AD%E7%94%A8%E5%88%B0%E7%9A%84%E9%99%8C%E7%94%9Fpython%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p>看Faster R-CNN代码时遇到的一些比较陌生，不熟悉的python命令。</p>
-<span id="more"></span>
-<ul>
-<li> zip函数</li>
-<li>with关键字</li>
+    <title>hexo博客基本命令和插件</title>
+    <url>/2022/01/04/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>Hexo 博客的一些基本操作方法以及使用过的一些插件。</p>
+<span id="more"></span> 
+
+<h2 id="插入语法框"><a href="#插入语法框" class="headerlink" title="插入语法框"></a>插入语法框</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/```bash</span><br><span class="line">要输入的语法 </span><br><span class="line">/```</span><br></pre></td></tr></table></figure>
+<p><strong>注意：为了防止编译加入的/，在实际应用中要去掉/</strong></p>
+<h3 id="插入本地图片"><a href="#插入本地图片" class="headerlink" title="插入本地图片"></a>插入本地图片</h3><p>需要将要插入的本地图片保存在博客根目录里source/images文件夹内。若没有images文件夹则新建一个，命名可自定。<br>然后加入以下代码：<br><strong>方法一：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![]()</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![a cat](/images/cat.png)</span><br></pre></td></tr></table></figure>
+<p>其中，[    ]内为对图片的描述，可以空白。</p>
+<p><strong>方法二：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">&quot;/images/cat.png&quot;</span> alt=<span class="string">&quot;a cat&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>“    “部分为本地图片的目录，和方法一的括号部分一样。alt部分为对图片的描述，可省略。</p>
+<p>若要更改图片的大小，可以使用以下语法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">&quot;/images/cat.png&quot;</span> width = <span class="string">&quot;300&quot;</span> height = <span class="string">&quot;200&quot;</span> alt=<span class="string">&quot;a cat&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>可以将图片设定为300x200尺寸大小。<br>也可以用百分比表示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">&quot;/images/cat.png&quot;</span> width=<span class="string">&quot;50%&quot;</span> height=<span class="string">&quot;50%&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入网络图片"><a href="#插入网络图片" class="headerlink" title="插入网络图片"></a>插入网络图片</h3><p>和插入本地图片的方法类似，只是把括号和引号内的内容换成网络图片的链接即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![](https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcbu01.alicdn.com%2Fimg%2Fibank%2F2013%2F911%2F003%2F849300119_1034603105.search.jpg&amp;refer=http%3A%2F%2Fcbu01.alicdn.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1643866229&amp;t=0240fb3f560c517cf504235362014f81)</span><br><span class="line">或者：</span><br><span class="line">&lt;img src=<span class="string">&quot;https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcbu01.alicdn.com%2Fimg%2Fibank%2F2013%2F911%2F003%2F849300119_1034603105.search.jpg&amp;refer=http%3A%2F%2Fcbu01.alicdn.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1643866229&amp;t=0240fb3f560c517cf504235362014f81&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="首页显示文章部分预览"><a href="#首页显示文章部分预览" class="headerlink" title="首页显示文章部分预览"></a>首页显示文章部分预览</h2><p>首页只预览部分内容，剩余内容需要点击阅读全文才能看到：<br>使用以下语法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;!--more--&gt; </span><br></pre></td></tr></table></figure>
+<p>语法后面的内容在首页看不到，只有点击阅读全文才能看到。</p>
+<h2 id="插入空格"><a href="#插入空格" class="headerlink" title="插入空格"></a>插入空格</h2><p>插入一个空格 (non-breaking space)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;nbsp;或&amp;<span class="comment">#160;或&amp;#xA0;</span></span><br></pre></td></tr></table></figure>
+<p>插入两个空格（en space）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;ensp;或&amp;<span class="comment">#8194；或&amp;#x2002；</span></span><br></pre></td></tr></table></figure>
+<p>插入四个空格（em space）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;emsp;或&amp;<span class="comment">#8195;或&amp;#x2003;</span></span><br></pre></td></tr></table></figure>
+<p>插入细空格（thin space）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;thinsp;或&amp;<span class="comment">#8201;或&amp;#x2009;</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：不要漏掉分号。</strong></p>
+<h2 id="创建新页面"><a href="#创建新页面" class="headerlink" title="创建新页面"></a>创建新页面</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page pagename</span><br></pre></td></tr></table></figure>
+
+<p>即可在hexo/myblog/source创建一个名为“pagename”的文件夹，并自动生成.md文件</p>
+<p>在站点配置文件添加上即可以在首页添加新的菜单</p>
+<h2 id="PDF功能"><a href="#PDF功能" class="headerlink" title="PDF功能"></a>PDF功能</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-pdf</span><br></pre></td></tr></table></figure>
+
+<h3 id="建立页面"><a href="#建立页面" class="headerlink" title="建立页面"></a>建立页面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page PDF </span><br></pre></td></tr></table></figure>
+
+<p>该命令在souce文件夹里建立一个名为PDF的文件夹，文件夹内有一md文件，</p>
+<h3 id="配置文件更改"><a href="#配置文件更改" class="headerlink" title="配置文件更改"></a>配置文件更改</h3><ul>
+<li><strong>主题配置文件</strong>：_config.yml：</li>
 </ul>
-<p>　　无论<code>with</code>中的代码块在执行的过程中发生任何情况，文件最终都会被关闭。如果代码块在执行的过程中发生了一个异常，那么在这个异常被抛出前，程序会先将被打开的文件关闭。</p>
+<p>　menu里添加PDF类别以及图标：</p>
+<p><img src="/images/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/image-20220105213935113.png"></p>
+<p>完成</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在PDF文件的.md文件里根据需求输入以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##外部链接：</span></span><br><span class="line">&#123;% pdf http://7xov2f.com1.z0.glb.clouddn.com/bash_freshman.pdf %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">##本地链接：</span></span><br><span class="line">&#123;% pdf ./pdf名字.pdf %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本地链接建议将pdf放在最初建立的PDF文件夹里：</p>
+<p><img src="/images/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/image-20220105214251153.png"></p>
+<p>这样就能在网站里看到这本书。</p>
+<h2 id="文章置顶"><a href="#文章置顶" class="headerlink" title="文章置顶"></a>文章置顶</h2><h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure>
+
+<p>在需要置顶的文章的 <code>Front-matter</code> 中加上 <code>top: true</code> 或者 <code>top: 任意数字</code>，比如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">title: Faster R-CNN</span><br><span class="line">date: 2022-01-05</span><br><span class="line">categories: </span><br><span class="line">	- [深度学习,Faster R-CNN]</span><br><span class="line">tags: </span><br><span class="line">	- 深度学习</span><br><span class="line">	- 目标检测</span><br><span class="line">	- Faster R-CNN</span><br><span class="line">top: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：top 中数字越大，文章越靠前</strong>。</p>
+<h3 id="配置置顶图标"><a href="#配置置顶图标" class="headerlink" title="配置置顶图标"></a>配置置顶图标</h3><p>打开 <code>/themes/next/layout/_macro/</code> 目录下的 <code>post.swig</code> 文件，在 <code>&lt;div class=&quot;post-meta&quot;&gt;</code> 的第一个 <code>&lt;span&gt;</code> 标签下，插入如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;% <span class="keyword">if</span> post.top %&#125;</span><br><span class="line">    &lt;i class=<span class="string">&quot;fa fa-thumb-tack&quot;</span>&gt;&lt;/i&gt;</span><br><span class="line">    &lt;font color=7D26CD&gt;置顶&lt;/font&gt;</span><br><span class="line">    &lt;span class=<span class="string">&quot;post-meta-divider&quot;</span>&gt;|&lt;/span&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如图：</p>
+<p><img src="/images/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/image-20220118200529609.png"></p>
+<p>即可实现置顶功能。</p>
+<h2 id="取消目录下划线"><a href="#取消目录下划线" class="headerlink" title="取消目录下划线"></a>取消目录下划线</h2><h2 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h2><h3 id="安装插件-1"><a href="#安装插件-1" class="headerlink" title="安装插件"></a>安装插件</h3><p>目录根目录下安装插件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-blog-encrypt --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><p>在文章开头添加密码和提示信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">title: test1</span><br><span class="line">password: 123456</span><br><span class="line">message: 请输入密码：</span><br><span class="line">abstract: 仅用来测试某些功能。(自用)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：文章解锁后并不会自动加密，所以关闭文章前要手动点击文章最后方的<code>Encrypt again</code>按钮，重新加密。</strong></p>
+<h2 id="添加背景图片"><a href="#添加背景图片" class="headerlink" title="添加背景图片"></a>添加背景图片</h2><p>把想设置的背景放入<code>../themes/next/source/images</code>中，命名为<code>background.jpg</code>。在根目录的<code>source</code>文件夹下新建文件夹<code>_data</code>与style文件<code>source/_data/styles.styl</code>，输入以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">body &#123;</span><br><span class="line"> 	<span class="attr">background</span>:url(<span class="regexp">/images/</span>background.jpg);</span><br><span class="line"> 	background-repeat: no-repeat;</span><br><span class="line">    background-attachment:fixed;</span><br><span class="line">    background-position:<span class="number">100</span>% <span class="number">100</span>%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　也可将图片放在其余位置，对应的就要修改代码里的图片路径。</p>
+<p><code>background:url</code>为图片路径，也可以直接使用链接。<br><code>background-repeat</code>：若果背景图片不能全屏，那么是否平铺显示，充满屏幕<br><code>background-attachment</code>：背景是否随着网页上下滚动而滚动，fixed为固定<br><code>background-position</code>：图片展示大小这里设置 100%，100% 的意义为：如果背景图片不能全屏，那么是否通过拉伸的方式将背景强制拉伸至全屏显示。<br>　　再在主题<code>_config.yml</code>文件中找到对应的<code>custom_file_path</code>,取消注释。</p>
+<h2 id="博客内容透明化"><a href="#博客内容透明化" class="headerlink" title="博客内容透明化"></a>博客内容透明化</h2><p>NexT 主题的博客文章均是不透明的，这样读者就不能好好欣赏背景图片了，在上文中新建的<code>style.styl</code>文件中可以使博客内容透明化：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//博客内容透明化</span><br><span class="line">//文章内容的透明度设置</span><br><span class="line">.content-wrap &#123;</span><br><span class="line">  opacity: 0.8;</span><br><span class="line">&#125;</span><br><span class="line">.main-inner &#123; </span><br><span class="line">   // margin-top: 60px;</span><br><span class="line">   // padding: 60px 60px 60px 60px;</span><br><span class="line"></span><br><span class="line">    opacity: 0.8;</span><br><span class="line">&#125;</span><br><span class="line">//侧边框的透明度设置</span><br><span class="line">.sidebar &#123;</span><br><span class="line">  opacity: 0.8;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//菜单栏的透明度设置</span><br><span class="line">.header-inner &#123;</span><br><span class="line">  background: rgba(255,255,255,0.8);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//搜索框（local-search）的透明度设置</span><br><span class="line">.popup &#123;</span><br><span class="line">  opacity: 0.8;</span><br><span class="line">&#125;</span><br><span class="line">————————————————</span><br><span class="line">版权声明：本文为CSDN博主「Oath丶forever」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。</span><br><span class="line">原文链接：https://blog.csdn.net/Growing_potato/article/details/113926856</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="边框圆角"><a href="#边框圆角" class="headerlink" title="边框圆角"></a>边框圆角</h2><p>　　在博客根目录的<code>source</code>文件夹下建立名为<code>_data</code>的新文件，在_data目录中新建名为<code>variables</code>的styl文件，在文件中输入以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 圆角设置</span></span><br><span class="line">$border-radius-inner     = 20px 20px 20px 20px;</span><br><span class="line">$border-radius           = 20px;</span><br></pre></td></tr></table></figure>
+
+<p>　　然后打开博客的<strong>站点配置</strong>文件，取消<code>variables.styl</code>的注释。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">variable: <span class="built_in">source</span>/_data/variables.styl</span><br></pre></td></tr></table></figure>
+
+<p>　　即可成功实现边框圆角的效果</p>
+<h2 id="本地搜索"><a href="#本地搜索" class="headerlink" title="本地搜索"></a>本地搜索</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>它用了 Hexo 插件 <code>hexo-generator-searchdb</code>，预先生成了一个文本库 <code>search.xml</code>，然后传到了网站里面。在本地搜索的时候，NexT 直接用 javascript 调用了这个文件，从而实现了静态网站的本地搜索。</p>
+<h3 id="安装插件-2"><a href="#安装插件-2" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>修改<strong>站点配置</strong>文件<code>_config.yml</code>，添加以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search搜索功能</span></span><br><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  <span class="built_in">limit</span>: 10000</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>[元组tuple](<a href="https://www.runoob.com/python/python-tuples.html">Python 元组 | 菜鸟教程 (runoob.com)</a>)</li>
-<li><a href="https://www.runoob.com/python/python-lists.html">列表list</a>  </li>
-<li><a href="https://www.runoob.com/python/att-string-split.html">split()方法</a></li>
-<li><a href="https://www.runoob.com/python/att-string-join.html">join()方法</a></li>
-<li></li>
+<li>path：索引文件的路径，相对于站点根目录</li>
+<li>field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面</li>
+<li>limit：限制搜索的条目数</li>
 </ul>
+<p>然后修改<strong>主题配置</strong>文件<code>_config.yml</code>：将Local Search部分的enable改为true。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/theme-next/hexo-generator-searchdb</span></span><br><span class="line">local_search:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span> </span><br><span class="line">  <span class="comment"># If auto, trigger search by changing input.</span></span><br><span class="line">  <span class="comment"># If manual, trigger search by pressing enter key or search button.</span></span><br><span class="line">  trigger: auto</span><br><span class="line">  <span class="comment"># Show top n results per article, show all results by setting to -1</span></span><br><span class="line">  top_n_per_article: 1</span><br><span class="line">  <span class="comment"># Unescape html strings to the readable one.</span></span><br><span class="line">  unescape: <span class="literal">false</span> </span><br><span class="line">  <span class="comment"># Preload the search data when the page loads.</span></span><br><span class="line">  preload: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="站点地图-sitemap-生成与使用"><a href="#站点地图-sitemap-生成与使用" class="headerlink" title="站点地图 sitemap 生成与使用"></a>站点地图 sitemap 生成与使用</h2><h3 id="配置Google-Search-Console"><a href="#配置Google-Search-Console" class="headerlink" title="配置Google Search Console"></a>配置Google Search Console</h3><ul>
+<li>打开<a href="https://search.google.com/search-console/welcome">Google Search Console</a>网站</li>
+<li>在<code>网址前缀</code>输入你的博客地址。例如，我的就是：<a href="https://www.wshuai.xyz/">https://www.wshuai.xyz/</a></li>
+<li>验证所有权建议使用第二种：<strong>HTML标记</strong></li>
+<li>复制HTML标记方法里谷歌提供的代码的<strong>最后的双引号</strong>部分</li>
+<li>打开博客的<strong>主题配置</strong>文件<code>_config.yml</code></li>
+<li>将刚刚复制的代码粘贴到google_site_verification后面（注意冒号之后空一格）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Google Webmaster tools verification.</span><br><span class="line"># See: https://www.google.com/webmasters</span><br><span class="line">    google_site_verification:   #粘贴复制的代码</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最后保存，再使用hexo命令上传到GitHub</li>
+<li>回到Google Search Console，点击验证，即可验证成功</li>
+</ul>
+<h3 id="配置百度站长平台"><a href="#配置百度站长平台" class="headerlink" title="配置百度站长平台"></a>配置百度站长平台</h3><p>与谷歌的配置方法相似，<a href="https://ziyuan.baidu.com/dashboard/">百度站长平台</a> ,同样使用<strong>HTML标记</strong>方法验证。同样需要复制到<strong>主题配置</strong>文件，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Baidu Webmaster tools verification.</span><br><span class="line"># See: https://ziyuan.baidu.com/site</span><br><span class="line">baidu_site_verification: 	#粘贴复制的代码（冒号后空一格）</span><br></pre></td></tr></table></figure>
+
+<p>保存，上传，验证。</p>
+<h3 id="通用站点地图"><a href="#通用站点地图" class="headerlink" title="通用站点地图"></a>通用站点地图</h3><p>可用于谷歌等网站，不能用于百度。</p>
+<p>安装插件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br></pre></td></tr></table></figure>
+
+<p>打开<strong>站点配置</strong>文件<code>_config.yml</code>，添加以下代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通用站点地图</span></span><br><span class="line">sitemap:</span><br><span class="line">  path: sitemap.xml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>代码添加完成后使用hexo命令重新上传博客到github</li>
+<li>打开<a href="https://search.google.com/search-console/welcome">Google Search Console</a> 点击索引里的站点地图，输入sitemap.xml,点击提交。</li>
+<li>注意：若您的博客未使用自定义域名可能会导致提交失败，建议博客使用自定义域名。</li>
+</ul>
+<h3 id="百度站点地图"><a href="#百度站点地图" class="headerlink" title="百度站点地图"></a>百度站点地图</h3><p>安装插件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure>
+
+<p>打开<strong>站点配置</strong>文件<code>_config.yml</code>，添加以下代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 百度站点地图</span></span><br><span class="line">baidusitemap:</span><br><span class="line">  path: baidusitemap.xml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>代码添加完成后使用hexo命令重新上传博客到github</p>
+</li>
+<li><p>需要在<a href="https://ziyuan.baidu.com/dashboard/">百度站长平台</a>注册好账号，添加好自己的站点信息。</p>
+</li>
+<li><p>点击资源提交的普通收录，选择sitmap</p>
+</li>
+<li><p>填写数据文件地址，例如：<a href="http://www.wshuai.xyz/baidusitemap.xml%EF%BC%8C%E5%8D%B3%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9F%9F%E5%90%8D%E5%90%8E%E5%8A%A0%60/sitmap.xml%60%EF%BC%8C%E6%A3%80%E6%9F%A5%E6%97%A0%E8%AF%AF%E5%90%8E%E7%82%B9%E5%87%BB%E6%8F%90%E4%BA%A4">http://www.wshuai.xyz/baidusitemap.xml，即自己的域名后加`/sitmap.xml`，检查无误后点击提交</a></p>
+</li>
+<li><p>提交后下方会显示文件名称，状态为等待。等待几天百度就会进行提取。</p>
+</li>
+</ul>
+<h2 id="百度主动推送"><a href="#百度主动推送" class="headerlink" title="百度主动推送"></a>百度主动推送</h2><h3 id="安装插件-3"><a href="#安装插件-3" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-baidu-url-submit --save</span><br></pre></td></tr></table></figure>
+
+<p>在<strong>站点配置</strong>文件<code>_config.yml</code> 中添加以下代码：</p>
+<p>根据自己的信息修改，</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 百度主动推送</span></span><br><span class="line">baidu_url_submit:</span><br><span class="line">  count: 5                     	  <span class="comment">## 提交最新的5个链接</span></span><br><span class="line">  host: https://www.wshuai.xyz/   <span class="comment">## 百度站长平台中注册的域名</span></span><br><span class="line">  token: 9obkqNpTVHM8iNYF         <span class="comment">## 准入秘钥</span></span><br><span class="line">  path: baidu_urls.txt            <span class="comment">## 文本文档的地址， 新链接会保存在此文本文档里</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>其中host填写自己在百度站长平台登陆的域名，也必须与<code>_config.yml</code>文件中url的值一样。</p>
+</li>
+<li><p>打开百度站长平台，点击普通收录的API提交，复制接口调用地址里<code>=</code><strong>后面</strong>的部分，粘贴到站点配置信息的token的后面。</p>
+</li>
+<li><p>最后加入新的deployer,打开<strong>站点配置</strong>文件，找到deploy部分，添加百度推送代码，如下：</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">- <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/WShuai123/wshuai123.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">- <span class="built_in">type</span>: baidu_url_submitter	<span class="comment">#添加这一行代码</span></span><br></pre></td></tr></table></figure>
+
+<p>这样在用git上传时同时就会向百度主动传送自己的网页。</p>
 ]]></content>
+      <categories>
+        <category>hexo教程</category>
+      </categories>
       <tags>
-        <tag>pytorch</tag>
-        <tag>python</tag>
+        <tag>hexo</tag>
+        <tag>next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决next博客文章目录点击不跳转的问题</title>
+    <url>/2022/01/17/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E7%82%B9%E5%87%BB%E4%B8%8D%E8%B7%B3%E8%BD%AC%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>　　博客的目录点击不跳转，该bug发生在中文语言的目录里。</p>
+<p>　　打开我们博客的文章页面，键盘F12打开网页的控制台，点击文章目录，控制台会报出如下错误：</p>
+<p><img src="/images/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E7%82%B9%E5%87%BB%E4%B8%8D%E8%B7%B3%E8%BD%AC%E9%97%AE%E9%A2%98/76d53c14f481c189b57e13fe048692d0f6ec0965.png@830w_242h_progressive.webp"></p>
+<p>　　根据提示，我们可以发现<code>utils.js</code>文件的第243行出现问题。</p>
+<p>　　我们打开主题的<code>themes\next\source\js</code>文件夹，打开<code>utils.js</code>文件，定位到240行附近，根据GitHub上的解决方法，删除以及添加几行，即可解决该问题，</p>
+<p><a href="https://github.com/theme-next/hexo-theme-next/pull/1540/commits/ec521c927dc10255977324284c1c667f2e220da7#diff-1792ad8339d1eed2d547ed3d50641a26797c40e48aadd09521293105d88f158cR245">GitHub链接</a></p>
+<p>改成如图所示：</p>
+<p><img src="/images/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E7%82%B9%E5%87%BB%E4%B8%8D%E8%B7%B3%E8%BD%AC%E9%97%AE%E9%A2%98/image-20220117220110124-16424309430776.png"></p>
+<p>保存，即可解决该bug。</p>
+]]></content>
+      <categories>
+        <category>hexo教程</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>next</tag>
       </tags>
   </entry>
   <entry>
@@ -579,149 +760,6 @@
         <tag>pytorch</tag>
         <tag>pycharm</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2022/01/04/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span> 
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>hexo博客基本命令</title>
-    <url>/2022/01/04/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p>本文介绍hexo博客的一些基本操作方法：</p>
-<span id="more"></span> 
-
-<h2 id="插入语法框"><a href="#插入语法框" class="headerlink" title="插入语法框"></a>插入语法框</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/```bash</span><br><span class="line">要输入的语法 </span><br><span class="line">/```</span><br></pre></td></tr></table></figure>
-<p><strong>注意：为了防止编译加入的/，在实际应用中要去掉/</strong></p>
-<h3 id="插入本地图片"><a href="#插入本地图片" class="headerlink" title="插入本地图片"></a>插入本地图片</h3><p>需要将要插入的本地图片保存在博客根目录里source/images文件夹内。若没有images文件夹则新建一个，命名可自定。<br>然后加入以下代码：<br><strong>方法一：</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![]()</span><br></pre></td></tr></table></figure>
-<p>例如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![a cat](/images/cat.png)</span><br></pre></td></tr></table></figure>
-<p>其中，[    ]内为对图片的描述，可以空白。</p>
-<p><strong>方法二：</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">&quot;/images/cat.png&quot;</span> alt=<span class="string">&quot;a cat&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>“    “部分为本地图片的目录，和方法一的括号部分一样。alt部分为对图片的描述，可省略。</p>
-<p>若要更改图片的大小，可以使用以下语法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">&quot;/images/cat.png&quot;</span> width = <span class="string">&quot;300&quot;</span> height = <span class="string">&quot;200&quot;</span> alt=<span class="string">&quot;a cat&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>可以将图片设定为300x200尺寸大小。<br>也可以用百分比表示：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">&quot;/images/cat.png&quot;</span> width=<span class="string">&quot;50%&quot;</span> height=<span class="string">&quot;50%&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="插入网络图片"><a href="#插入网络图片" class="headerlink" title="插入网络图片"></a>插入网络图片</h3><p>和插入本地图片的方法类似，只是把括号和引号内的内容换成网络图片的链接即可。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![](https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcbu01.alicdn.com%2Fimg%2Fibank%2F2013%2F911%2F003%2F849300119_1034603105.search.jpg&amp;refer=http%3A%2F%2Fcbu01.alicdn.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1643866229&amp;t=0240fb3f560c517cf504235362014f81)</span><br><span class="line">或者：</span><br><span class="line">&lt;img src=<span class="string">&quot;https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcbu01.alicdn.com%2Fimg%2Fibank%2F2013%2F911%2F003%2F849300119_1034603105.search.jpg&amp;refer=http%3A%2F%2Fcbu01.alicdn.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1643866229&amp;t=0240fb3f560c517cf504235362014f81&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="首页显示文章部分预览"><a href="#首页显示文章部分预览" class="headerlink" title="首页显示文章部分预览"></a>首页显示文章部分预览</h2><p>首页只预览部分内容，剩余内容需要点击阅读全文才能看到：<br>使用以下语法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;!--more--&gt; </span><br></pre></td></tr></table></figure>
-<p>语法后面的内容在首页看不到，只有点击阅读全文才能看到。</p>
-<h2 id="插入空格"><a href="#插入空格" class="headerlink" title="插入空格"></a>插入空格</h2><p>插入一个空格 (non-breaking space)</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;nbsp;或&amp;<span class="comment">#160;或&amp;#xA0;</span></span><br></pre></td></tr></table></figure>
-<p>插入两个空格（en space）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;ensp;或&amp;<span class="comment">#8194；或&amp;#x2002；</span></span><br></pre></td></tr></table></figure>
-<p>插入四个空格（em space）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;emsp;或&amp;<span class="comment">#8195;或&amp;#x2003;</span></span><br></pre></td></tr></table></figure>
-<p>插入细空格（thin space）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&amp;thinsp;或&amp;<span class="comment">#8201;或&amp;#x2009;</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：不要漏掉分号。</strong></p>
-<h2 id="创建新页面"><a href="#创建新页面" class="headerlink" title="创建新页面"></a>创建新页面</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page pagename</span><br></pre></td></tr></table></figure>
-
-<p>即可在hexo/myblog/source创建一个名为“pagename”的文件夹，并自动生成.md文件</p>
-<p>在站点配置文件添加上即可以在首页添加新的菜单</p>
-<h2 id="PDF功能"><a href="#PDF功能" class="headerlink" title="PDF功能"></a>PDF功能</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-pdf</span><br></pre></td></tr></table></figure>
-
-<h3 id="建立页面"><a href="#建立页面" class="headerlink" title="建立页面"></a>建立页面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page PDF </span><br></pre></td></tr></table></figure>
-
-<p>该命令在souce文件夹里建立一个名为PDF的文件夹，文件夹内有一md文件，</p>
-<h3 id="配置文件更改"><a href="#配置文件更改" class="headerlink" title="配置文件更改"></a>配置文件更改</h3><ul>
-<li><strong>主题配置文件</strong>：_config.yml：</li>
-</ul>
-<p>　menu里添加PDF类别以及图标：</p>
-<p><img src="/images/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/image-20220105213935113.png"></p>
-<p>完成</p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在PDF文件的.md文件里根据需求输入以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##外部链接：</span></span><br><span class="line">&#123;% pdf http://7xov2f.com1.z0.glb.clouddn.com/bash_freshman.pdf %&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">##本地链接：</span></span><br><span class="line">&#123;% pdf ./pdf名字.pdf %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>本地链接建议将pdf放在最初建立的PDF文件夹里：</p>
-<p><img src="/images/hexo%E5%8D%9A%E5%AE%A2%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/image-20220105214251153.png"></p>
-<p>这样就能在网站里看到这本书。</p>
-]]></content>
-      <categories>
-        <category>hexo教程</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>pytorch代码结构总结梳理</title>
-    <url>/2022/01/08/pytorch%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93%E6%A2%B3%E7%90%86/</url>
-    <content><![CDATA[<p>代码结构 (！不完全)</p>
-<span id="more"></span>
-<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><blockquote>
-<p>数据读取:OS.torch.utils.data.Dataset<br>数据变换:(torchvision.transforms)<br>数据增强:(mixip,cutput,cutmix)</p>
-</blockquote>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><blockquote>
-<p>torchvision.model, 可以调用resnet50,inceptionv4等网络结构</p>
-</blockquote>
-<h2 id="优化器及loss"><a href="#优化器及loss" class="headerlink" title="优化器及loss"></a>优化器及loss</h2><blockquote>
-<p>优化器optimizer：SGD,Adm等</p>
-<p>loss</p>
-</blockquote>
-<h2 id="训练函数"><a href="#训练函数" class="headerlink" title="训练函数"></a>训练函数</h2><blockquote>
-<p>sklearn kfold:</p>
-<p>for kfold:</p>
-<p>　　for i in range(num_epochs):</p>
-<p>　　　　　for image,label in dataloader:</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>-pytorch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>test1</title>
-    <url>/2022/01/04/test1/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="b03b19b58a4523a2d58b25372a395a8a9a8057aa6fabaeb22b3b69297b627fdf">4630436162ade97ba2718b7d0c4b3b636d5758fd5d23299054388fb1042541f42507ef3c8edb0c426107949bdb1aabca2907047a074e7755dc120f3152b03805d47f9ee2637a546646296232e733ee36705b36905d9c7267f3967408ae0b667f79c56ffc029cfba8ca791279a8eb30d4c65918a85c2b179afac6c16b14b6076b83d48ee7e24fdf93e13f15d433e17c9115df359de421f1c8309cd90be142936e9931533923e1f9d053ac50b954fb645e719620682ab70d1043f52b863fab15cd6798fe3e2799148abbd103c02056fd1f0abe06aa2f068e1fb6f7bd6db79a5ded5f886a7d70e33b7d0b8f346cc013275435e354e4f659d91449d0da90a4cdbeeff550bb6214c3984de383efc396c2b9985e21c0faabc01df1870ed663d3e96be0cf46204717eaf2a8ff89cf52d842cde0509c40a1ca64dbfbfc6c2c96599b443406eacf98f0d92973db2f0d0e33082de6bb97518ce076277797ec8f450a1d66f6675019af1811ebdd1e4d8e6361f6112266af9f3c45c2f627cedba43d66ee891f5fe451eaf15bca5f7c27dfd2a5cd1e610c9068509bd82b3a96175914c1d72dddf482a01796ac18c2aa959f4870bc9ded1e41f32de77071628a614d737cae60b7304869430d638b8265b44e9027e38223aa6ba90f8bca28ca08f27b512e63c8bcfd40efe664b0161d686f9707d3c6e3a4d201bd422a18cc5c8441bdeab0d432aefde881b37c12e13a34400ab6cbe547b576b89c34bbd2dfde24e03fced1a9b72d569428bbb950bc15d3722b2e6d701117460bac846a8527db85c5e133dbb6c701c6c2e865f53994bc6c5dc3f45175785fc9f8bf4859334eecd23bf6bf15371ad05a29db23bf9ee77f66219a89391e9f46e44b5865d0f85125e0d94045dfade16b99521364d0211615edc8f375adf349de745dde921596d820e9297d3a422654232e9d9767c255d8f4a1e2b0f501902b5c7f714595eed01833501ec20ef2031cea2b95f3677b5a8225371a37f062113a346e8bb16820f76a544be60347a727100540374b94c61a342dcd5eedfc9ece7e93904554aa433e3df2a43d4a7d1cdeed94ff065806fa910292a0ccb02c60562d53512942001e67ea2131fa4b3ff2375b8efd9777085ee6834b11423e9b92b7cabcd6b63d1cf797f7abb9edbd67be33996798bee7da0624638ecbc9250ce2ba242b0e9b8267a341c25d159574d36c57e8061ad76f06166afc5355bb6b4ad9585e3607867c25e968ca8e04d18296d7ded15d0f0e8e5b5c4554ed0715cd6e25e36489f308562914e56d64583b1e2b304f4568cf254b944567d7afc65137d5e583a0200f50262098d8c1ecd33e6c4d9b675034abc79d7cb7e4d38ae461f73c9b74cba40e7090b752a0a18e42e649c7a2329d30e73a8b66c3f5442014562ae1154a7a6b2df02ffc385cbf48c1c23a3804b7ecc4be16c333d8d3c04b56e656ae86334bd7672765cc05b39c240e3abbfe56d4dcddc8d28329401b93d311d141bdb049a66f878746d4a8c28fc2958d131db16468af581f48ce2a621ed88fd0e5ce796ba295cc24909da0ad1075835ac033adeb18be76662563305b43100f682d85629f49f3d141d0f7192fb28286827d7dd8c1887cda513c25b8e6dafdcf90f0eb83d3bcb577c78c8fb7c265408b99196343ce7b75b8cde0e0d90dace0a81a9fb97b64126852a714cdab8ef5fc64ac2834bcb4cf2630e6903b9c423ec8e528295700b484cbe03d520434bc2cb455d6b16c0ac9ed4d9bfad0b70b7b4de7b019679099b73a7097b2e974a1f3d1afd34095d1cad3e2953f89f1ba1d24f1d0e5ff8b7744623dba210e91d56270215c8985a950f871b3e9719a23e3c6ef4fa137e32f0ad6aea63b48ccc51b856e49cc67505de6dc7a24f4ea4beed9c63b18c961ff8cbd4c9df82a4d24346c5e6cd9d327569d9648fd31b57aab855595ad7bc5016966633acb9aa38dfb2d4503a7fc22bee260d1e84876df2acdfefdb501d9a896d32f49e8927e1b0894e3d299fa8766b82b4f5a514a3aafa59802e3f048c7388f62beff738528b4962ebfc32d4d930d549095c16c82d44375a1f3d4299a9b3937d77863e533d6d4f1c31b438bbb427a4853185ee57cc579cb09661208c3407e1e8106da11538c5d482c7e293d6fff0516e12414c44638b63b1b6c614c853fe9d832491c5fc53b5275d3c664b10398c7706ddc317db3569f9de68e7ce262afa5e359060bcbfcd333b66048a7e69254da485d8746489b86cd94e7feb321e213ce1c32e2514c2b39dcf456d13271aff044e33fee84cc7102ce8bf0d022ef1902c114e082f34e5748ebab01eddb4879934f037b601076ccfb78cc7c96fb7617ef3625b87ddd8b72c5f1ae21f2ca0e0503b8f5dc18aab5591a0146cf90fd57c35b6e84eb3d72f791e568a8a9ed5db3216718672888c7db10d0c462507d91ede897931c138412ba29baeb8223ab2d8358cc534f0f671b1a0a6c054150804932f816c0f82afe11a60e3280f5a85fb4cdb1222bed1746f29f5ee6728c75a4a70d54bdba4f20e9aa42662663c434cce2be8dce007268310a0ddffaf7332c6244d0319f6c79fa04018bc543fa5abdc218a7ff526e7e2aca632fae340c86ecdcd51cc9888876a5811b4de978247b33f3bee842712d1dfe6363cd30df67d121b0d85ef1a4af3ec1567f25d1faadb745c0178e9586cc50b447d0bd55943cc4dc9bdfc4fb9f03f4871ab9e21e83b49e2262c8a1bcadfc1c77a97a308ba838cf5a0edd35f06f60565397c8c3ba3693e3acade4fb8c332a0ad32623e093ca9ecff2cf2009871db767a5ca05bd5fa50028f57964d10cfd735c704fc3288adc009a4568d16f4dbd9f950769af1c90e49d833ae1890fb348e511de7d8472b6e8f048fbce10c0dd775029aa8f1f372e034f4c074483820d136ae3e57057dec63b03d111fc70dbf72f6c957d47d9b4c084dad30fa1574bd9f205f7d06a3fe88655d30c8718f86fdefc020fb17c021d2e9f49db9ac0b9fa2806b2c004c74b0b78e5a6fc82d50600582b2044cc3bf03aa9bbb2dc1973e3bf535067a7c7c54618ed0c4760f81718aeebfa94f7b8ede4fe4ae0fb8a24fd341a7398a4d0da947d08eb7b64c3c3c4e97485603daf4353d15e77f1fdb006a4289d14116cd7e06b93e01c51d9ede37ade3dc4d2034c06e22b47686729ad3e75b4d3d5f37383f4c3d68acb9a1760563237e7e2fbd46b4c70e4123f8cd3d8fce8f0074fde55cdbfd63117c3b6c02071a3070a1a809e88395dcfe91dc503</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码：</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-  </entry>
-  <entry>
-    <title>解决next博客文章目录点击不跳转的问题</title>
-    <url>/2022/01/17/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E7%82%B9%E5%87%BB%E4%B8%8D%E8%B7%B3%E8%BD%AC%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>解决中文环境下next主题博客目录点击不跳转的问题</p>
-<span id="more"></span>
-
-<p>博客的目录点击不跳转，该bug发生在中文语言的目录里。</p>
-<p>打开我们博客的文章页面，键盘F12打开网页的控制台，点击文章目录，控制台会报出如下错误：</p>
-<p><img src="/images/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E7%82%B9%E5%87%BB%E4%B8%8D%E8%B7%B3%E8%BD%AC%E9%97%AE%E9%A2%98/76d53c14f481c189b57e13fe048692d0f6ec0965.png@830w_242h_progressive.webp"></p>
-<p>根据提示，我们可以发现utils.js文件的第243行出现问题。</p>
-<p>我们打开主题的themes\next\source\js文件夹，打开utils.js文件，定位到240行附近，根据GitHub上的解决方法，删除以及添加几行，即可解决该问题，</p>
-<p><a href="https://github.com/theme-next/hexo-theme-next/pull/1540/commits/ec521c927dc10255977324284c1c667f2e220da7#diff-1792ad8339d1eed2d547ed3d50641a26797c40e48aadd09521293105d88f158cR245">GitHub链接</a></p>
-<p>改成如图所示：</p>
-<p><img src="/images/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E7%82%B9%E5%87%BB%E4%B8%8D%E8%B7%B3%E8%BD%AC%E9%97%AE%E9%A2%98/image-20220117220110124-16424309430776.png"></p>
-<p>保存，即可解决该bug。</p>
-]]></content>
   </entry>
   <entry>
     <title>目标检测算法综述</title>
@@ -837,5 +875,21 @@
         <tag>YOLO</tag>
         <tag>SSD</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>test</title>
+    <url>/2022/01/04/test1/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="b03b19b58a4523a2d58b25372a395a8a9a8057aa6fabaeb22b3b69297b627fdf">4630436162ade97ba2718b7d0c4b3b636d5758fd5d23299054388fb1042541f42507ef3c8edb0c426107949bdb1aabca2907047a074e7755dc120f3152b03805d47f9ee2637a546646296232e733ee36705b36905d9c7267f3967408ae0b667f79c56ffc029cfba8ca791279a8eb30d4c65918a85c2b179afac6c16b14b6076b83d48ee7e24fdf93e13f15d433e17c9115df359de421f1c8309cd90be142936e9931533923e1f9d053ac50b954fb645e719620682ab70d1043f52b863fab15cd6798fe3e2799148abbd103c02056fd1f0abe06aa2f068e1fb6f7bd6db79a5ded5f886a7d70e33b7d0b8f346cc013275435e354e4f659d91449d0da90a4cdbeeff550bb6214c3984de383efc396c2b9985e21c0faabc01df1870ed663d3e96be0cf46204717eaf2a8ff89cf52d842cde0509c40a1ca64dbfbfc6c2c96599b443406eacf98f0d92973db2f0d0e33082de6bb97518ce076277797ec8f450a1d66f6675019af1811ebdd1e4d8e6361f6112266af9f3c45c2f627cedba43d66ee891f5fe451eaf15bca5f7c27dfd2a5cd1e610c9068509bd82b3a96175914c1d72dddf482a01796ac18c2aa959f4870bc9ded1e41f32de77071628a614d737cae60b7304869430d638b8265b44e9027e38223aa6ba90f8bca28ca08f27b512e63c8bcfd40efe664b0161d686f9707d3c6e3a4d201bd422a18cc5c8441bdeab0d432aefde881b37c12e13a34400ab6cbe547b576b89c34bbd2dfde24e03fced1a9b72d569428bbb950bc15d3722b2e6d701117460bac846a8527db85c5e133dbb6c701c6c2e865f53994bc6c5dc3f45175785fc9f8bf4859334eecd23bf6bf15371ad05a29db23bf9ee77f66219a89391e9f46e44b5865d0f85125e0d94045dfade16b99521364d0211615edc8f375adf349de745dde921596d820e9297d3a422654232e9d9767c255d8f4a1e2b0f501902b5c7f714595eed01833501ec20ef2031cea2b95f3677b5a8225371a37f062113a346e8bb16820f76a544be60347a727100540374b94c61a342dcd5eedfc9ece7e93904554aa433e3df2a43d4a7d1cdeed94ff065806fa910292a0ccb02c60562d53512942001e67ea2131fa4b3ff2375b8efd9777085ee6834b11423e9b92b7cabcd6b63d1cf797f7abb9edbd67be33996798bee7da0624638ecbc9250ce2ba242b0e9b8267a341c25d159574d36c57e8061ad76f06166afc5355bb6b4ad9585e3607867c25e968ca8e04d18296d7ded15d0f0e8e5b5c4554ed0715cd6e25e36489f308562914e56d64583b1e2b304f4568cf254b944567d7afc65137d5e583a0200f50262098d8c1ecd33e6c4d9b675034abc79d7cb7e4d38ae461f73c9b74cba40e7090b752a0a18e42e649c7a2329d30e73a8b66c3f5442014562ae1154a7a6b2df02ffc385cbf48c1c23a3804b7ecc4be16c333d8d3c04b56e656ae86334bd7672765cc05b39c240e3abbfe56d4dcddc8d28329401b93d311d141bdb049a66f878746d4a8c28fc2958d131db16468af581f48ce2a621ed88fd0e5ce796ba295cc24909da0ad1075835ac033adeb18be76662563305b43100f682d85629f49f3d141d0f7192fb28286827d7dd8c1887cda513c25b8e6dafdcf90f0eb83d3bcb577c78c8fb7c265408b99196343ce7b75b8cde0e0d90dace0a81a9fb97b64126852a714cdab8ef5fc64ac2834bcb4cf2630e6903b9c423ec8e528295700b484cbe03d520434bc2cb455d6b16c0ac9ed4d9bfad0b70b7b4de7b019679099b73a7097b2e974a1f3d1afd34095d1cad3e2953f89f1ba1d24f1d0e5ff8b7744623dba210e91d56270215c8985a950f871b3e9719a23e3c6ef4fa137e32f0ad6aea63b48ccc51b856e49cc67505de6dc7a24f4ea4beed9c63b18c961ff8cbd4c9df82a4d24346c5e6cd9d327569d9648fd31b57aab855595ad7bc5016966633acb9aa38dfb2d4503a7fc22bee260d1e84876df2acdfefdb501d9a896d32f49e8927e1b0894e3d299fa8766b82b4f5a514a3aafa59802e3f048c7388f62beff738528b4962ebfc32d4d930d549095c16c82d44375a1f3d4299a9b3937d77863e533d6d4f1c31b438bbb427a4853185ee57cc579cb09661208c3407e1e8106da11538c5d482c7e293d6fff0516e12414c44638b63b1b6c614c853fe9d832491c5fc53b5275d3c664b10398c7706ddc317db3569f9de68e7ce262afa5e359060bcbfcd333b66048a7e69254da485d8746489b86cd94e7feb321e213ce1c32e2514c2b39dcf456d13271aff044e33fee84cc7102ce8bf0d022ef1902c114e082f34e5748ebab01eddb4879934f037b601076ccfb78cc7c96fb7617ef3625b87ddd8b72c5f1ae21f2ca0e0503b8f5dc18aab5591a0146cf90fd57c35b6e84eb3d72f791e568a8a9ed5db3216718672888c7db10d0c462507d91ede897931c138412ba29baeb8223ab2d8358cc534f0f671b1a0a6c054150804932f816c0f82afe11a60e3280f5a85fb4cdb1222bed1746f29f5ee6728c75a4a70d54bdba4f20e9aa42662663c434cce2be8dce007268310a0ddffaf7332c6244d0319f6c79fa04018bc543fa5abdc218a7ff526e7e2aca632fae340c86ecdcd51cc9888876a5811b4de978247b33f3bee842712d1dfe6363cd30df67d121b0d85ef1a4af3ec1567f25d1faadb745c0178e9586cc50b447d0bd55943cc4dc9bdfc4fb9f03f4871ab9e21e83b49e2262c8a1bcadfc1c77a97a308ba838cf5a0edd35f06f60565397c8c3ba3693e3acade4fb8c332a0ad32623e093ca9ecff2cf2009871db767a5ca05bd5fa50028f57964d10cfd735c704fc3288adc009a4568d16f4dbd9f950769af1c90e49d833ae1890fb348e511de7d8472b6e8f048fbce10c0dd775029aa8f1f372e034f4c074483820d136ae3e57057dec63b03d111fc70dbf72f6c957d47d9b4c084dad30fa1574bd9f205f7d06a3fe88655d30c8718f86fdefc020fb17c021d2e9f49db9ac0b9fa2806b2c004c74b0b78e5a6fc82d50600582b2044cc3bf03aa9bbb2dc1973e3bf535067a7c7c54618ed0c4760f81718aeebfa94f7b8ede4fe4ae0fb8a24fd341a7398a4d0da947d08eb7b64c3c3c4e97485603daf4353d15e77f1fdb006a4289d14116cd7e06b93e01c51d9ede37ade3dc4d2034c06e22b47686729ad3e75b4d3d5f37383f4c3d68acb9a1760563237e7e2fbd46b4c70e4123f8cd3d8fce8f0074fde55cdbfd63117c3b6c02071a3070a1a809e88395dcfe91dc503</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码：</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
   </entry>
 </search>
