@@ -1,104 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Pytorch中用到的陌生python命令</title>
-    <url>/2022/01/06/2022-01-06-Pytorch%E4%B8%AD%E7%94%A8%E5%88%B0%E7%9A%84%E9%99%8C%E7%94%9Fpython%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p>看Faster R-CNN代码时遇到的一些比较陌生，不熟悉的python命令。</p>
-<span id="more"></span>
-<ul>
-<li> zip函数</li>
-<li>with关键字</li>
-</ul>
-<p>　　无论<code>with</code>中的代码块在执行的过程中发生任何情况，文件最终都会被关闭。如果代码块在执行的过程中发生了一个异常，那么在这个异常被抛出前，程序会先将被打开的文件关闭。</p>
-<ul>
-<li>[元组tuple](<a href="https://www.runoob.com/python/python-tuples.html">Python 元组 | 菜鸟教程 (runoob.com)</a>)</li>
-<li><a href="https://www.runoob.com/python/python-lists.html">列表list</a>  </li>
-<li><a href="https://www.runoob.com/python/att-string-split.html">split()方法</a></li>
-<li><a href="https://www.runoob.com/python/att-string-join.html">join()方法</a></li>
-<li></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>pytorch</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Pytorch和Pycharm的安装和配置</title>
-    <url>/2022/01/05/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h2 id="搭载Conda环境"><a href="#搭载Conda环境" class="headerlink" title="搭载Conda环境"></a>搭载Conda环境</h2><p>搭载Conda环境我们使用Anaconda软件</p>
-<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">清华原镜像</a>根据自己电脑的系统选择最新的安装包，我的电脑为Windows10 64位，因此选择第一个。<br><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105170049546.png"></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装路径可自定。为了减少以后不必要的麻烦，建议选All users。以及勾选advanced options的第一个选项，其余默认即可。</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105170237869.png"></p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105170647257.png"></p>
-<p>安装需要一些时间。。。</p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>安装完成后，Windows开始菜单可以看到，在Prompt中输入conda list，能看到许多packages，证明安装完成。</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105171130573.png"></p>
-<img src="/images/Pytorch和Pycharm的安装和配置/image-20220105171429207.png" style="zoom:67%;" />
-
-<h3 id="创建python环境"><a href="#创建python环境" class="headerlink" title="创建python环境"></a>创建python环境</h3><p>anaconda prompt创建环境</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#创建一个名字为DPlearning的python3.9环境，环境名称和python版本可自定</span></span><br><span class="line">conda create -n DPlearning python=3.9</span><br></pre></td></tr></table></figure>
-
-<p>会安装一些包，选择y即可。</p>
-<img src="/images/Pytorch和Pycharm的安装和配置/image-20220105172757325.png" style="zoom: 67%;" />
-
-<p>安装完成后可以搭建pytorch的环境。</p>
-<h3 id="GPU环境"><a href="#GPU环境" class="headerlink" title="GPU环境"></a>GPU环境</h3><p>我的电脑有英伟达的GPU，因此装的GPU环境。</p>
-<p>桌面右键打开英伟达控制面板，右键没有英伟达控制面板就去挂网下载最新驱动</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173224328.png"></p>
-<p>点击系统信息，</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173302254.png"></p>
-<p>根据驱动版本选择对应的cuda版本</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173408251.png"></p>
-<p>或者在组件里能够看到支持的最高cuda版本</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173408251.png"></p>
-<h4 id="安装pytorch-GPU版本"><a href="#安装pytorch-GPU版本" class="headerlink" title="安装pytorch GPU版本"></a>安装pytorch GPU版本</h4><p><a href="https://pytorch.org/">pytorch官网</a> </p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173907106.png"></p>
-<p>根据自己的需求选，</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173924774.png"></p>
-<p>安装包很大，所以我们最好在安装前先配置上清华源，prompt输入以下命令</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span></span><br><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span></span><br><span class="line">conda config --set show_channel_urls yes</span><br><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span></span><br></pre></td></tr></table></figure>
-
-<p>复制安装命令，<strong>注意，去掉后面的-c pytorch</strong></p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105174034252.png"></p>
-<p>然后DOS窗口<strong>activate命令进入刚刚建立的conda环境</strong>，粘贴安装命令，回车，等待安装。。。</p>
-<p>出现选择统统选y。等待。。。</p>
-<p>安装完成</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105182909350.png"></p>
-<p>输入以下命令检测是否安装成功</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python</span><br><span class="line">import torch	<span class="comment">#未报错说明torch安装成功</span></span><br><span class="line"><span class="built_in">print</span>(torch.cuda.is_available())	<span class="comment">#输出为True说明cuda安装正常</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105183052580.png"></p>
-<p>至此，pytorch和cuda的安装结束。接下来是在pycharm里配置pytorch。</p>
-<h2 id="Pycharm"><a href="#Pycharm" class="headerlink" title="Pycharm"></a>Pycharm</h2><h3 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h3><p><a href="https://www.jetbrains.com/pycharm/download/#section=windows">官网下载</a> 下载社区版就行。</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105172257502.png"></p>
-<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>按照自己需求勾选。对后续进程无影响。</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105185236893.png"></p>
-<p>等待安装完成。。。</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105185522779.png" alt="image-20220105185522779"></p>
-<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>新项目的位置可以自定，由于之前配置了pytorch环境，所以我们选择Previously configured interpreter，选中之前配置好的python解释器，点击创建，</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105190058442.png"></p>
-<p>如果Previously configured interpreter空白，点后面的三个点，可以找到之前配置好的python解释器。选择完后点创建。<br><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105190312021.png"></p>
-<p>pycharm设置里，python解释器里也有torch，终端命令检测也正常。</p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105195741017.png"></p>
-<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105195936721.png"></p>
-<p>至此，安装结束。</p>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>pytorch</tag>
-        <tag>深度学习</tag>
-        <tag>pycharm</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Faster R-CNN</title>
     <url>/2022/01/05/Faster_R-CNN/</url>
     <content><![CDATA[<p>Pytorch版Faster R-CNN代码的一些解析。(不断更新中…)</p>
 <span id="more"></span>
 
+<h2 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h2><ul>
+<li>Python3.9</li>
+<li>Pytorch1.10</li>
+<li>Windows10</li>
+</ul>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
 <li><p>图像输入网络得到特征图</p>
 </li>
@@ -573,6 +485,99 @@
         <tag>深度学习</tag>
         <tag>目标检测</tag>
         <tag>Faster R-CNN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pytorch中用到的陌生python命令</title>
+    <url>/2022/01/06/2022-01-06-Pytorch%E4%B8%AD%E7%94%A8%E5%88%B0%E7%9A%84%E9%99%8C%E7%94%9Fpython%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>看Faster R-CNN代码时遇到的一些比较陌生，不熟悉的python命令。</p>
+<span id="more"></span>
+<ul>
+<li> zip函数</li>
+<li>with关键字</li>
+</ul>
+<p>　　无论<code>with</code>中的代码块在执行的过程中发生任何情况，文件最终都会被关闭。如果代码块在执行的过程中发生了一个异常，那么在这个异常被抛出前，程序会先将被打开的文件关闭。</p>
+<ul>
+<li>[元组tuple](<a href="https://www.runoob.com/python/python-tuples.html">Python 元组 | 菜鸟教程 (runoob.com)</a>)</li>
+<li><a href="https://www.runoob.com/python/python-lists.html">列表list</a>  </li>
+<li><a href="https://www.runoob.com/python/att-string-split.html">split()方法</a></li>
+<li><a href="https://www.runoob.com/python/att-string-join.html">join()方法</a></li>
+<li></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>pytorch</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pytorch和Pycharm的安装和配置</title>
+    <url>/2022/01/05/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="搭载Conda环境"><a href="#搭载Conda环境" class="headerlink" title="搭载Conda环境"></a>搭载Conda环境</h2><p>搭载Conda环境我们使用Anaconda软件</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">清华原镜像</a>根据自己电脑的系统选择最新的安装包，我的电脑为Windows10 64位，因此选择第一个。<br><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105170049546.png"></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装路径可自定。为了减少以后不必要的麻烦，建议选All users。以及勾选advanced options的第一个选项，其余默认即可。</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105170237869.png"></p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105170647257.png"></p>
+<p>安装需要一些时间。。。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>安装完成后，Windows开始菜单可以看到，在Prompt中输入conda list，能看到许多packages，证明安装完成。</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105171130573.png"></p>
+<img src="/images/Pytorch和Pycharm的安装和配置/image-20220105171429207.png" style="zoom:67%;" />
+
+<h3 id="创建python环境"><a href="#创建python环境" class="headerlink" title="创建python环境"></a>创建python环境</h3><p>anaconda prompt创建环境</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#创建一个名字为DPlearning的python3.9环境，环境名称和python版本可自定</span></span><br><span class="line">conda create -n DPlearning python=3.9</span><br></pre></td></tr></table></figure>
+
+<p>会安装一些包，选择y即可。</p>
+<img src="/images/Pytorch和Pycharm的安装和配置/image-20220105172757325.png" style="zoom: 67%;" />
+
+<p>安装完成后可以搭建pytorch的环境。</p>
+<h3 id="GPU环境"><a href="#GPU环境" class="headerlink" title="GPU环境"></a>GPU环境</h3><p>我的电脑有英伟达的GPU，因此装的GPU环境。</p>
+<p>桌面右键打开英伟达控制面板，右键没有英伟达控制面板就去挂网下载最新驱动</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173224328.png"></p>
+<p>点击系统信息，</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173302254.png"></p>
+<p>根据驱动版本选择对应的cuda版本</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173408251.png"></p>
+<p>或者在组件里能够看到支持的最高cuda版本</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173408251.png"></p>
+<h4 id="安装pytorch-GPU版本"><a href="#安装pytorch-GPU版本" class="headerlink" title="安装pytorch GPU版本"></a>安装pytorch GPU版本</h4><p><a href="https://pytorch.org/">pytorch官网</a> </p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173907106.png"></p>
+<p>根据自己的需求选，</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105173924774.png"></p>
+<p>安装包很大，所以我们最好在安装前先配置上清华源，prompt输入以下命令</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span></span><br><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span></span><br><span class="line">conda config --set show_channel_urls yes</span><br><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span></span><br></pre></td></tr></table></figure>
+
+<p>复制安装命令，<strong>注意，去掉后面的-c pytorch</strong></p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105174034252.png"></p>
+<p>然后DOS窗口<strong>activate命令进入刚刚建立的conda环境</strong>，粘贴安装命令，回车，等待安装。。。</p>
+<p>出现选择统统选y。等待。。。</p>
+<p>安装完成</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105182909350.png"></p>
+<p>输入以下命令检测是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python</span><br><span class="line">import torch	<span class="comment">#未报错说明torch安装成功</span></span><br><span class="line"><span class="built_in">print</span>(torch.cuda.is_available())	<span class="comment">#输出为True说明cuda安装正常</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105183052580.png"></p>
+<p>至此，pytorch和cuda的安装结束。接下来是在pycharm里配置pytorch。</p>
+<h2 id="Pycharm"><a href="#Pycharm" class="headerlink" title="Pycharm"></a>Pycharm</h2><h3 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h3><p><a href="https://www.jetbrains.com/pycharm/download/#section=windows">官网下载</a> 下载社区版就行。</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105172257502.png"></p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>按照自己需求勾选。对后续进程无影响。</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105185236893.png"></p>
+<p>等待安装完成。。。</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105185522779.png" alt="image-20220105185522779"></p>
+<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>新项目的位置可以自定，由于之前配置了pytorch环境，所以我们选择Previously configured interpreter，选中之前配置好的python解释器，点击创建，</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105190058442.png"></p>
+<p>如果Previously configured interpreter空白，点后面的三个点，可以找到之前配置好的python解释器。选择完后点创建。<br><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105190312021.png"></p>
+<p>pycharm设置里，python解释器里也有torch，终端命令检测也正常。</p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105195741017.png"></p>
+<p><img src="/images/Pytorch%E5%92%8CPycharm%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/image-20220105195936721.png"></p>
+<p>至此，安装结束。</p>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>pytorch</tag>
+        <tag>pycharm</tag>
       </tags>
   </entry>
   <entry>
