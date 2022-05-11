@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.wshuai.xyz/2022/05/11/%E9%82%AE%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%8F%91%E9%80%81%E8%AE%AD%E7%BB%83%E7%BB%93%E6%9E%9C/</loc>
+    
+    <lastmod>2022-05-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.wshuai.xyz/tools/index.html</loc>
     
     <lastmod>2022-04-11</lastmod>
