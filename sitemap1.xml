@@ -4,7 +4,16 @@
   <url>
     <loc>https://www.wshuai.xyz/2022/05/11/%E9%82%AE%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%8F%91%E9%80%81%E8%AE%AD%E7%BB%83%E7%BB%93%E6%9E%9C/</loc>
     
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.wshuai.xyz/2022/01/04/test1/</loc>
+    
+    <lastmod>2022-05-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -23,15 +32,6 @@
     <loc>https://www.wshuai.xyz/2022/01/04/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95%E7%BB%BC%E8%BF%B0/</loc>
     
     <lastmod>2022-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.wshuai.xyz/2022/01/04/test1/</loc>
-    
-    <lastmod>2022-02-16</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -121,78 +121,78 @@
 
   <url>
     <loc>https://www.wshuai.xyz/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://www.wshuai.xyz/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.wshuai.xyz/tags/pytorch/</loc>
-    <lastmod>2022-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.wshuai.xyz/tags/pycharm/</loc>
-    <lastmod>2022-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.wshuai.xyz/tags/hexo/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.wshuai.xyz/tags/next/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.wshuai.xyz/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2022-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.wshuai.xyz/tags/pytorch/</loc>
+    <lastmod>2022-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.wshuai.xyz/tags/pycharm/</loc>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.wshuai.xyz/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.wshuai.xyz/tags/%E7%BB%BC%E8%BF%B0/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.wshuai.xyz/tags/RNN/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.wshuai.xyz/tags/YOLO/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.wshuai.xyz/tags/SSD/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -200,29 +200,29 @@
 
   
   <url>
-    <loc>https://www.wshuai.xyz/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <loc>https://www.wshuai.xyz/categories/hexo%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.wshuai.xyz/categories/hexo%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <loc>https://www.wshuai.xyz/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.wshuai.xyz/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.wshuai.xyz/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E7%BB%BC%E8%BF%B0/</loc>
-    <lastmod>2022-05-11</lastmod>
+    <lastmod>2022-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
